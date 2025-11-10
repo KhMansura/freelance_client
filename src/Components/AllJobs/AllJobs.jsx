@@ -1,11 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const AllJobs = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+  return <div>jobs</div>;
 };
 
 export default AllJobs;
