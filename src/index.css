@@ -19,3 +19,69 @@
 .btn-primary:hover{
   @apply opacity-90;
 }
+
+/* src/index.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global styles */
+body {
+  @apply bg-gray-50 text-gray-800;
+}
+
+a {
+  @apply text-blue-600 hover:text-blue-800 underline;
+}
+
+/* Loader */
+.loader {
+  @apply flex justify-center items-center h-screen;
+}
+
+/* Navbar */
+.navbar {
+  @apply bg-white shadow-sm;
+}
+
+/* Footer */
+footer {
+  @apply bg-gray-800 text-white py-6 text-center;
+}
+
+/* Job Card */
+.job-card {
+  @apply bg-white rounded-lg shadow-md p-4 mb-4 border border-gray-200;
+}
+
+.job-card img {
+  @apply w-full h-40 object-cover rounded mb-4;
+}
+
+.job-card h3 {
+  @apply font-bold text-lg mb-2;
+}
+
+.job-card p {
+  @apply text-gray-600 mb-2;
+}
+
+/* Buttons */
+.btn-primary {
+  @apply bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors;
+}
+
+.btn-secondary {
+  @apply bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .job-card {
+    @apply p-3;
+  }
+  .job-card img {
+    @apply h-32;
+  }
+}
