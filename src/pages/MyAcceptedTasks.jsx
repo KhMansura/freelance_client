@@ -8,35 +8,68 @@ const MyAcceptedTasks = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchTasks = async () => {
-    if (!user) return setLoading(false);
-    try {
-      setLoading(true);
-      const { data } = await axios.get(`http://localhost:3000/acceptedTasks?userEmail=${encodeURIComponent(user.email)}`);
-      setTasks(data || []);
-    } catch (err) {
-      console.error(err);
-      toast.error("Failed to fetch accepted tasks");
-    } finally {
-      setLoading(false);
-    }
-  };
+//   const fetchTasks = async () => {
+//     if (!user) return setLoading(false);
+//     try {
+//       setLoading(true);
+//       const { data } = await axios.get(`http://localhost:3000/acceptedTasks?userEmail=${encodeURIComponent(user.email)}`);
+//       setTasks(data || []);
+//     } catch (err) {
+//       console.error(err);
+//       toast.error("Failed to fetch accepted tasks");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+const fetchTasks = async () => {
+  if (!user) return setLoading(false);
+  try {
+    setLoading(true);
+    // ✅ Use correct route & param: GET /accepted-tasks?email=...
+    const { data } = await axios.get(`http://localhost:3000/accepted-tasks`, {
+      params: { email: user.email }  // ✅ not `userEmail`
+    });
+    setTasks(Array.isArray(data) ? data : []);
+  } catch (err) {
+    console.error("Fetch tasks error:", err);
+    toast.error("Failed to load accepted tasks");
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     fetchTasks();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  const handleDoneOrCancel = async (taskId) => {
-    try {
-      await axios.delete(`http://localhost:3000/acceptedTasks/${taskId}`);
-      setTasks(prev => prev.filter(t => t._id !== taskId));
-      toast.success("Task removed");
-    } catch (err) {
-      console.error(err);
-      toast.error("Failed to remove task");
-    }
-  };
+//   const handleDoneOrCancel = async (taskId) => {
+//     try {
+//       await axios.delete(`http://localhost:3000/acceptedTasks/${taskId}`);
+//       setTasks(prev => prev.filter(t => t._id !== taskId));
+//       toast.success("Task removed");
+//     } catch (err) {
+//       console.error(err);
+//       toast.error("Failed to remove task");
+//     }
+//   };
+
+const handleDoneOrCancel = async (taskId) => {
+  if (!taskId) return toast.error("Invalid task ID");
+
+  try {
+    // ✅ Use correct route: /accepted-tasks/:id (with hyphen)
+    await axios.delete(`http://localhost:3000/accepted-tasks/${taskId}`);
+    
+    setTasks(prev => prev.filter(t => t._id !== taskId));
+    toast.success("Task removed");
+  } catch (err) {
+    console.error("Delete task error:", err.response?.data || err.message);
+    const msg = err.response?.data?.error || "Failed to remove task";
+    toast.error(msg);
+  }
+};
 
   if (loading) return <div className="loader">Loading...</div>;
   if (!user) return <div className="container mx-auto px-4 py-8">Please log in to see your accepted tasks.</div>;

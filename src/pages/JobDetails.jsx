@@ -27,25 +27,43 @@ const JobDetails = () => {
     return () => (mounted = false);
   }, [id]);
 
-  const handleAccept = async () => {
-    if (!user) return toast.error("Please log in to accept jobs");
-    if (job.userEmail === user.email) return toast.error("You cannot accept your own job");
+//   const handleAccept = async () => {
+//     if (!user) return toast.error("Please log in to accept jobs");
+//     if (job.userEmail === user.email) return toast.error("You cannot accept your own job");
 
-    try {
-      await axios.post("http://localhost:3000/acceptedTasks", {
-        jobId: job._id,
-        jobTitle: job.title,
-        acceptedBy: user.displayName || user.email,
-        userEmail: user.email,
-        acceptedAt: new Date().toISOString()
-      });
-      toast.success("Job accepted — check My Accepted Tasks");
-      navigate("/my-accepted-tasks");
-    } catch (err) {
-      console.error(err);
-      toast.error("Failed to accept job");
-    }
-  };
+//     try {
+//       await axios.post("http://localhost:3000/acceptedTasks", {
+//         jobId: job._id,
+//         jobTitle: job.title,
+//         acceptedBy: user.displayName || user.email,
+//         userEmail: user.email,
+//         acceptedAt: new Date().toISOString()
+//       });
+//       toast.success("Job accepted — check My Accepted Tasks");
+//       navigate("/my-accepted-tasks");
+//     } catch (err) {
+//       console.error(err);
+//       toast.error("Failed to accept job");
+//     }
+//   };
+
+const handleAccept = async () => {
+  if (!user) return toast.error("Please log in to accept jobs");
+  if (job.userEmail === user.email) return toast.error("You cannot accept your own job");
+
+  try {
+    // ✅ Use correct route: POST /accept-job/:id
+    await axios.post(`http://localhost:3000/accept-job/${id}`, {
+      userEmail: user.email  // ✅ matches server's `req.body.userEmail`
+    });
+    toast.success("Job accepted — check My Accepted Tasks");
+    navigate("/my-accepted-tasks");
+  } catch (err) {
+    console.error("Accept job error:", err.response?.data || err.message);
+    const msg = err.response?.data?.error || "Failed to accept job";
+    toast.error(msg);
+  }
+};
 
   const handleDelete = async () => {
     if (!user) return toast.error("Unauthorized");

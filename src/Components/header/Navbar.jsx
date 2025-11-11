@@ -145,7 +145,7 @@ export default function Navbar() {
           {user ? (
             <>
               <NavLink
-                to="/addJob"
+                to="/addJobs"
                 className={({ isActive }) =>
                   `px-3 py-2 rounded-md transition-colors ${
                     isActive
