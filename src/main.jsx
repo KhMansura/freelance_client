@@ -64,6 +64,7 @@ import MyAddedJobs from './pages/MyAddedJobs';
 import MyAcceptedTasks from './pages/MyAcceptedTasks';
 import NotFound from './pages/NotFound';
 import PrivateRoute from './Components/PrivateRoute';
+import UpdateJob from './pages/UpdateJob';
 
 
 
@@ -81,6 +82,7 @@ const router = createBrowserRouter([
       { path: 'my-accepted-tasks', element: <MyAcceptedTasks /> },
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
+      { path:  'updateJob/:id', element:<UpdateJob></UpdateJob>},
       { path: '*', element: <NotFound /> },
     ],
   },

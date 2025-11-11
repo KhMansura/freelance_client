@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router";
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const JobDetails = () => {
   const { id } = useParams();
@@ -67,8 +68,24 @@ const handleAccept = async () => {
 
   const handleDelete = async () => {
     if (!user) return toast.error("Unauthorized");
-    if (job.userEmail !== user.email) return toast.error("You can only delete your own job");
-    if (!confirm("Delete this job? This cannot be undone.")) return;
+    if (job.userEmail !== user.email) 
+        return toast.error("You can only delete your own job");
+
+    const result = await Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+    cancelButtonText: "Cancel"
+  });
+
+
+
+if (!result.isConfirmed)return;
+    // if (!confirm("Delete this job? This cannot be undone.")) return;
 
     try {
       await axios.delete(`http://localhost:3000/jobs/${job._id}`);
