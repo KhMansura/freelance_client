@@ -1,11 +1,64 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import useAuth from "../hooks/useAuth";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const MyAcceptedTasks = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+  const { user } = useAuth();
+  const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchTasks = async () => {
+    if (!user) return setLoading(false);
+    try {
+      setLoading(true);
+      const { data } = await axios.get(`http://localhost:3000/acceptedTasks?userEmail=${encodeURIComponent(user.email)}`);
+      setTasks(data || []);
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to fetch accepted tasks");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchTasks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
+
+  const handleDoneOrCancel = async (taskId) => {
+    try {
+      await axios.delete(`http://localhost:3000/acceptedTasks/${taskId}`);
+      setTasks(prev => prev.filter(t => t._id !== taskId));
+      toast.success("Task removed");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to remove task");
+    }
+  };
+
+  if (loading) return <div className="loader">Loading...</div>;
+  if (!user) return <div className="container mx-auto px-4 py-8">Please log in to see your accepted tasks.</div>;
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <h2 className="text-2xl font-semibold mb-4">My Accepted Tasks</h2>
+      {tasks.length === 0 && <p>No accepted tasks yet.</p>}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {tasks.map(t => (
+          <div key={t._id} className="job-card">
+            <h3 className="font-bold">{t.jobTitle}</h3>
+            <p className="text-sm text-gray-600">Accepted at: {new Date(t.acceptedAt).toLocaleString()}</p>
+            <div className="flex gap-3 mt-3">
+              <button onClick={() => handleDoneOrCancel(t._id)} className="btn btn-success">Done</button>
+              <button onClick={() => handleDoneOrCancel(t._id)} className="btn btn-error">Cancel</button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default MyAcceptedTasks;

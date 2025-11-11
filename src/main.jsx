@@ -63,6 +63,7 @@ import AddJobs from './pages/AddJobs';
 import MyAddedJobs from './pages/MyAddedJobs';
 import MyAcceptedTasks from './pages/MyAcceptedTasks';
 import NotFound from './pages/NotFound';
+import PrivateRoute from './Components/PrivateRoute';
 
 
 
@@ -75,7 +76,7 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: 'allJobs', element: <AllJobs /> },
       { path: 'allJobs/:id', element: <JobDetails /> },
-      { path: 'addJobs', element: <AddJobs /> },
+      { path: 'addJobs', element: <PrivateRoute><AddJobs /></PrivateRoute> },
       { path: 'myAddedJobs', element: <MyAddedJobs /> },
       { path: 'my-accepted-tasks', element: <MyAcceptedTasks /> },
       { path: 'login', element: <Login /> },

@@ -176,7 +176,7 @@ export default function Navbar() {
                     src={
                       user.photoURL ||
                       `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                        user.displayName || "User"
+                        user.displayName || user.email.split('@')[0]
                       )}&background=0D8ABC&color=fff`
                     }
                     alt="Profile"
