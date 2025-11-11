@@ -82,7 +82,7 @@
 import { Link, NavLink, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 // import { useAuth } from "../hooks/useAuth"; // ← You already have this hook
-
+import logo from '../../assets/logo.png';
 export default function Navbar() {
   const { user, loading, signOutUser } = useAuth();
   const navigate = useNavigate();
@@ -111,9 +111,21 @@ export default function Navbar() {
     <nav className="navbar bg-white shadow-sm px-4 py-3">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="text-xl font-bold text-blue-600">
+
+        {/* <Link to="/" 
+        className="text-xl font-bold text-blue-600">
           Freelance<span className="text-gray-700">Hub</span>
-        </Link>
+        </Link> */}
+        <Link to="/" className="flex items-center space-x-2">
+      <img 
+        src={logo} 
+        alt="FreelanceHub Logo" 
+        className="h-8 w-auto rounded-xl" 
+      />
+      <span className="text-xl font-bold text-blue-600">
+        Freelance<span className="text-gray-600">Hub</span>
+      </span>
+    </Link>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-6">

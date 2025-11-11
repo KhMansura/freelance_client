@@ -4,16 +4,18 @@ import { Outlet } from "react-router";
 import Footer from "../Components/Footer/Footer";
 
 const RootLayout = () => {
-//   Persist theme on load (dark/light toggle)
+  //   Persist theme on load (dark/light toggle)
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
+    const savedTheme = localStorage.getItem("theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <Navbar></Navbar>
-      <Outlet></Outlet>
+      <main className="flex-grow">
+        <Outlet></Outlet>
+      </main>
       <Footer></Footer>
     </div>
   );
