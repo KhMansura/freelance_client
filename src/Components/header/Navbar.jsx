@@ -82,7 +82,7 @@
 import { Link, NavLink, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 // import { useAuth } from "../hooks/useAuth"; // ← You already have this hook
-import logo from '../../assets/logo.png';
+import logo from "../../assets/logo.png";
 export default function Navbar() {
   const { user, loading, signOutUser } = useAuth();
   const navigate = useNavigate();
@@ -117,15 +117,15 @@ export default function Navbar() {
           Freelance<span className="text-gray-700">Hub</span>
         </Link> */}
         <Link to="/" className="flex items-center space-x-2">
-      <img 
-        src={logo} 
-        alt="FreelanceHub Logo" 
-        className="h-8 w-auto rounded-xl" 
-      />
-      <span className="text-xl font-bold text-blue-600">
-        Freelance<span className="text-gray-600">Hub</span>
-      </span>
-    </Link>
+          <img
+            src={logo}
+            alt="FreelanceHub Logo"
+            className="h-8 w-auto rounded-xl"
+          />
+          <span className="text-xl font-bold text-blue-600">
+            Freelance<span className="text-gray-600">Hub</span>
+          </span>
+        </Link>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-6">
@@ -188,7 +188,7 @@ export default function Navbar() {
                     src={
                       user.photoURL ||
                       `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                        user.displayName || user.email.split('@')[0]
+                        user.displayName || user.email.split("@")[0]
                       )}&background=0D8ABC&color=fff`
                     }
                     alt="Profile"

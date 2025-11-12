@@ -378,40 +378,64 @@
 
 // export default Home;
 import { useEffect, useState } from "react";
-
+import { motion } from "framer-motion";
 import axios from "axios";
 import { Link } from "react-router";
 
 export default function Home() {
   const [jobs, setJobs] = useState([]);
 
-//   useEffect(() => {
-//     axios.get(`${import.meta.env.VITE_API_URL}/jobs/latest`)
-//       .then(res => setJobs(res.data))
-//       .catch(console.error);
-//   }, []);
-useEffect(() => {
-  axios.get(`${import.meta.env.VITE_API_URL}/jobs/latest`)
-    .then(res => {
-      console.log("Response:", res.data); // 👀 See what the backend sends
-      setJobs(res.data);
-    })
-    .catch(console.error);
-}, []);
-
+  //   useEffect(() => {
+  //     axios.get(`${import.meta.env.VITE_API_URL}/jobs/latest`)
+  //       .then(res => setJobs(res.data))
+  //       .catch(console.error);
+  //   }, []);
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_API_URL}/jobs/latest`)
+      .then((res) => {
+        console.log("Response:", res.data); // 👀 See what the backend sends
+        setJobs(res.data);
+      })
+      .catch(console.error);
+  }, []);
 
   return (
     <div className="container mx-auto px-4 py-10">
       {/* Banner */}
       <section className="text-center mb-12">
-        <h1 className="text-5xl font-bold mb-4">Find Reliable Freelancers Fast</h1>
-        <p className="mb-6 text-gray-600">
-          Join FreelanceHub — your go-to marketplace for finding and posting freelance jobs.
-        </p>
-        <div className="space-x-4">
-          <Link to="/addJobs" className="btn btn-primary">Create a Job</Link>
-          <Link to="/allJobs" className="btn btn-secondary">Explore Jobs</Link>
-        </div>
+        {/* Inside banner section: */}
+        <motion.h1
+          className="text-5xl font-bold mb-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          Find Reliable Freelancers Fast
+        </motion.h1>
+        <motion.p
+          className="mb-6 text-gray-600"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+        >
+          Join FreelanceHub — your go-to marketplace for finding and posting
+          freelance jobs.
+        </motion.p>
+
+        <motion.div
+          className="space-x-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+        >
+          <Link to="/addJobs" className="btn btn-primary">
+            Create a Job
+          </Link>
+          <Link to="/allJobs" className="btn btn-secondary">
+            Explore Jobs
+          </Link>
+        </motion.div>
       </section>
 
       {/* Latest Jobs */}
@@ -425,25 +449,61 @@ useEffect(() => {
               <p>{job.summary.slice(0, 60)}...</p>
               <Link to={`/allJobs/${job._id}`} className="btn btn-primary">View Details</Link>
             </div> */}
-            {/* ))} */}
-            {Array.isArray(jobs) && jobs.length > 0 ? (
-  jobs.map(job => (
-    <div key={job._id} className="job-card">
-      <img src={job.coverImage} alt={job.title} 
-         />
-      <h3>{job.title}</h3>
-      <p>{job.summary?.slice(0, 60)}...</p>
-      <Link to={`/allJobs/${job._id}`} className="btn btn-primary">View Details</Link>
-    </div>
-  ))
-) : (
-  <p className="text-center text-gray-500">No jobs found.</p>
-)}
-
-          
+          {/* ))} */}
+          {Array.isArray(jobs) && jobs.length > 0 ? (
+            jobs.map((job) => (
+              <div key={job._id} className="job-card">
+                <img src={job.coverImage} alt={job.title} />
+                <h3>{job.title}</h3>
+                <p>{job.summary?.slice(0, 60)}...</p>
+                <Link to={`/allJobs/${job._id}`} className="btn btn-primary">
+                  View Details
+                </Link>
+              </div>
+            ))
+          ) : (
+            <p className="text-center text-gray-500">No jobs found.</p>
+          )}
         </div>
       </section>
-          {/* Two static sections */}
+      {/* Latest Jobs */}
+      {/* <section>
+        <h2 className="text-3xl font-bold mb-6 text-center">Latest Jobs</h2>
+        <div className="grid md:grid-cols-3 gap-6">
+          {/* 👇 REPLACE THIS BLOCK WITH THE IMPROVED VERSION BELOW 👇 */}
+
+      {/* {jobs.length === 0 ? (
+            <p className="text-center text-gray-500 col-span-full">
+              No jobs found.
+            </p>
+          ) : (
+            jobs.slice(0, 6).map((job) => (
+              <div
+                key={job._id}
+                className="border rounded-lg p-4 shadow-sm hover:shadow-md transition"
+              >
+                <img
+                  src={job.coverImage || "/placeholder.svg"}
+                  alt={job.title}
+                  className="w-full h-40 object-cover rounded mb-3"
+                  onError={(e) => (e.target.src = "/placeholder.svg")} // fallback
+                />
+                <h3 className="font-bold text-lg">{job.title}</h3>
+                <p className="text-gray-600 text-sm mt-1 line-clamp-2">
+                  {job.summary || "No description provided."}
+                </p>
+                <Link
+                  to={`/allJobs/${job._id}`}
+                  className="mt-3 inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+                >
+                  View Details
+                </Link>
+              </div>
+            ))
+          )}
+        </div>
+      </section> */}
+      {/* Two static sections */}
       <section className="grid md:grid-cols-2 gap-6">
         <div className="p-6 bg-white rounded shadow">
           <h3 className="font-semibold text-xl mb-2">Top Categories</h3>
@@ -455,8 +515,13 @@ useEffect(() => {
         </div>
 
         <div className="p-6 bg-white rounded shadow">
-          <h3 className="font-semibold text-xl mb-2">About Freelance MarketPlace</h3>
-          <p className="text-gray-700">A simple and secure place for clients and freelancers to post and accept tasks easily.</p>
+          <h3 className="font-semibold text-xl mb-2">
+            About Freelance MarketPlace
+          </h3>
+          <p className="text-gray-700">
+            A simple and secure place for clients and freelancers to post and
+            accept tasks easily.
+          </p>
         </div>
       </section>
 
@@ -464,7 +529,8 @@ useEffect(() => {
       <section className="mt-16 text-center">
         <h2 className="text-2xl font-semibold mb-4">About FreelanceHub</h2>
         <p className="max-w-2xl mx-auto text-gray-600">
-          FreelanceHub connects skilled freelancers and clients in a seamless environment where projects come alive.
+          FreelanceHub connects skilled freelancers and clients in a seamless
+          environment where projects come alive.
         </p>
       </section>
     </div>
