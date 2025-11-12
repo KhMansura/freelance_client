@@ -69,6 +69,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../firebase/firebase.init";
 import { toast } from "react-toastify";
@@ -78,6 +79,25 @@ const googleProvider = new GoogleAuthProvider();
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+    // ✅ NEW: Add updateUserProfile method
+  const updateUserProfile = async (profile) => {
+    if (!auth.currentUser) {
+      throw new Error("No user is signed in.");
+    }
+    try {
+      setLoading(true);
+      await updateProfile(auth.currentUser, profile);
+      // Refresh user object to include new profile data
+      await auth.currentUser.reload();
+      setUser({ ...auth.currentUser }); // force context update
+    } catch (err) {
+      toast.error(`Profile update failed: ${err.message}`);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -139,10 +159,12 @@ export default function AuthProvider({ children }) {
     signInUser,
     signInWithGoogle,
     signOutUser,
+    updateUserProfile,
   };
 
   return (
-    <AuthContext.Provider value={authInfo}>{children}
+    <AuthContext.Provider value={authInfo}>
+        {children}
     </AuthContext.Provider>
   );
 }

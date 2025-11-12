@@ -28,63 +28,62 @@ const JobDetails = () => {
     return () => (mounted = false);
   }, [id]);
 
-//   const handleAccept = async () => {
-//     if (!user) return toast.error("Please log in to accept jobs");
-//     if (job.userEmail === user.email) return toast.error("You cannot accept your own job");
+  //   const handleAccept = async () => {
+  //     if (!user) return toast.error("Please log in to accept jobs");
+  //     if (job.userEmail === user.email) return toast.error("You cannot accept your own job");
 
-//     try {
-//       await axios.post("http://localhost:3000/acceptedTasks", {
-//         jobId: job._id,
-//         jobTitle: job.title,
-//         acceptedBy: user.displayName || user.email,
-//         userEmail: user.email,
-//         acceptedAt: new Date().toISOString()
-//       });
-//       toast.success("Job accepted — check My Accepted Tasks");
-//       navigate("/my-accepted-tasks");
-//     } catch (err) {
-//       console.error(err);
-//       toast.error("Failed to accept job");
-//     }
-//   };
+  //     try {
+  //       await axios.post("http://localhost:3000/acceptedTasks", {
+  //         jobId: job._id,
+  //         jobTitle: job.title,
+  //         acceptedBy: user.displayName || user.email,
+  //         userEmail: user.email,
+  //         acceptedAt: new Date().toISOString()
+  //       });
+  //       toast.success("Job accepted — check My Accepted Tasks");
+  //       navigate("/my-accepted-tasks");
+  //     } catch (err) {
+  //       console.error(err);
+  //       toast.error("Failed to accept job");
+  //     }
+  //   };
 
-const handleAccept = async () => {
-  if (!user) return toast.error("Please log in to accept jobs");
-  if (job.userEmail === user.email) return toast.error("You cannot accept your own job");
+  const handleAccept = async () => {
+    if (!user) return toast.error("Please log in to accept jobs");
+    if (job.userEmail === user.email)
+      return toast.error("You cannot accept your own job");
 
-  try {
-    // ✅ Use correct route: POST /accept-job/:id
-    await axios.post(`http://localhost:3000/accept-job/${id}`, {
-      userEmail: user.email  // ✅ matches server's `req.body.userEmail`
-    });
-    toast.success("Job accepted — check My Accepted Tasks");
-    navigate("/my-accepted-tasks");
-  } catch (err) {
-    console.error("Accept job error:", err.response?.data || err.message);
-    const msg = err.response?.data?.error || "Failed to accept job";
-    toast.error(msg);
-  }
-};
+    try {
+      // ✅ Use correct route: POST /accept-job/:id
+      await axios.post(`http://localhost:3000/accept-job/${id}`, {
+        userEmail: user.email, // ✅ matches server's `req.body.userEmail`
+      });
+      toast.success("Job accepted — check My Accepted Tasks");
+      navigate("/my-accepted-tasks");
+    } catch (err) {
+      console.error("Accept job error:", err.response?.data || err.message);
+      const msg = err.response?.data?.error || "Failed to accept job";
+      toast.error(msg);
+    }
+  };
 
   const handleDelete = async () => {
     if (!user) return toast.error("Unauthorized");
-    if (job.userEmail !== user.email) 
-        return toast.error("You can only delete your own job");
+    if (job.userEmail !== user.email)
+      return toast.error("You can only delete your own job");
 
     const result = await Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, delete it!",
-    cancelButtonText: "Cancel"
-  });
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel",
+    });
 
-
-
-if (!result.isConfirmed)return;
+    if (!result.isConfirmed) return;
     // if (!confirm("Delete this job? This cannot be undone.")) return;
 
     try {
@@ -98,22 +97,40 @@ if (!result.isConfirmed)return;
   };
 
   if (loading) return <div className="loader">Loading...</div>;
-  if (!job) return <div className="container mx-auto px-4 py-8">Job not found.</div>;
+  if (!job)
+    return <div className="container mx-auto px-4 py-8">Job not found.</div>;
 
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="bg-white rounded shadow p-6">
-        {job.coverImage && <img src={job.coverImage} alt={job.title} className="w-full h-64 object-cover rounded mb-4" />}
+        {job.coverImage && (
+          <img
+            src={job.coverImage}
+            alt={job.title}
+            className="w-full h-64 object-cover rounded mb-4"
+          />
+        )}
         <h1 className="text-2xl font-bold mb-2">{job.title}</h1>
-        <p className="text-sm text-gray-600 mb-4">{job.category} • Posted by {job.postedBy}</p>
+        <p className="text-sm text-gray-600 mb-4">
+          {job.category} • Posted by {job.postedBy}
+        </p>
         <p className="mb-4">{job.summary}</p>
 
         <div className="flex gap-3">
-          <button onClick={handleAccept} className="btn btn-primary">Accept</button>
+          <button onClick={handleAccept} className="btn btn-primary">
+            Accept
+          </button>
           {user && job.userEmail === user.email && (
             <>
-              <button onClick={() => navigate(`/updateJob/${job._id}`)} className="btn btn-secondary">Edit</button>
-              <button onClick={handleDelete} className="btn btn-outline">Delete</button>
+              <button
+                onClick={() => navigate(`/updateJob/${job._id}`)}
+                className="btn btn-secondary"
+              >
+                Edit
+              </button>
+              <button onClick={handleDelete} className="btn btn-outline">
+                Delete
+              </button>
             </>
           )}
         </div>
@@ -121,9 +138,9 @@ if (!result.isConfirmed)return;
     </div>
   );
 };
- export default JobDetails;
+export default JobDetails;
 
- // import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 // import { useParams } from "react-router";
 // import axios from "axios";
 // import { toast } from "react-toastify";

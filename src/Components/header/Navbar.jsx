@@ -83,9 +83,11 @@ import { Link, NavLink, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 // import { useAuth } from "../hooks/useAuth"; // ← You already have this hook
 import logo from "../../assets/logo.png";
+import { useState } from "react";
 export default function Navbar() {
   const { user, loading, signOutUser } = useAuth();
   const navigate = useNavigate();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleSignOut = async () => {
     try {
@@ -108,22 +110,18 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="navbar bg-gradient-to-r from-blue-200 via-blue-400 to-blue-200 shadow-md px-4 py-3">
+    <nav className="navbar bg-gradient-to-r from-cyan-800 via-blue-400 to-cyan-600 shadow-md px-4 py-3">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
 
-        {/* <Link to="/" 
-        className="text-xl font-bold text-blue-600">
-          Freelance<span className="text-gray-700">Hub</span>
-        </Link> */}
         <Link to="/" className="flex items-center space-x-2">
           <img
             src={logo}
             alt="FreelanceHub Logo"
             className="h-8 w-auto rounded-xl"
           />
-          <span className="text-xl font-bold text-blue-600">
-            Freelance<span className="text-gray-600">Hub</span>
+          <span className="text-xl font-bold text-blue-800">
+            Freelance<span className="text-gray-700">Hub</span>
           </span>
         </Link>
 
@@ -132,9 +130,9 @@ export default function Navbar() {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `px-3 py-2 rounded-md transition-colors ${
+              `px-3 py-2 rounded-md transition-colors font-medium ${
                 isActive
-                  ? "text-blue-600 font-medium"
+                  ? "text-blue-700 font-medium"
                   : "text-gray-600 hover:text-gray-900"
               }`
             }
@@ -182,7 +180,7 @@ export default function Navbar() {
               </NavLink>
 
               {/* Avatar Dropdown */}
-              <div className="relative group">
+              {/* <div className="relative group">
                 <button className="flex items-center space-x-2 focus:outline-none">
                   <img
                     src={
@@ -204,7 +202,7 @@ export default function Navbar() {
                   <div className="px-4 py-2 text-sm text-gray-700 border-b">
                     {user.displayName}
                     <br />
-                    <span className="text-xs text-gray-500">{user.email}</span>
+                    <span className="text-xs text-gray-600">{user.email}</span>
                   </div>
                   <button
                     onClick={handleSignOut}
@@ -213,7 +211,62 @@ export default function Navbar() {
                     Log Out
                   </button>
                 </div>
-              </div>
+              {/* </div> */}
+              {/* Avatar Dropdown */}
+<div className="relative group">
+  <button 
+    className="flex items-center space-x-2 focus:outline-none"
+    aria-label="User menu"
+  >
+    {/* ✅ Avatar with fallback */}
+    <div className="relative">
+      {user.photoURL ? (
+        <img
+          src={user.photoURL}
+          alt={user.displayName || "User"}
+          className="w-8 h-8 rounded-full border border-white/30 object-cover"
+          onError={(e) => {
+            // Fallback if photoURL broken
+            e.target.style.display = 'none';
+            e.target.nextSibling.style.display = 'flex';
+          }}
+        />
+      ) : null}
+
+      {/* Fallback: Initials circle (always rendered, hidden by default) */}
+      <div 
+        className="absolute inset-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-medium"
+        style={{ display: user.photoURL ? 'none' : 'flex' }}
+      >
+        {(user.displayName || user.email)
+          .split(/\s+/)
+          .map(n => n[0])
+          .join('')
+          .toUpperCase()
+          .slice(0, 2)}
+      </div>
+    </div>
+
+    <span className="hidden md:inline text-gray-700 font-medium">
+      {user.displayName || user.email.split("@")[0]}
+    </span>
+  </button>
+
+  {/* Dropdown */}
+  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden group-hover:block z-10 border">
+    <div className="px-4 py-2 text-sm text-gray-700 border-b">
+      {user.displayName}
+      <br />
+      <span className="text-xs text-gray-500">{user.email}</span>
+    </div>
+    <button
+      onClick={handleSignOut}
+      className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+    >
+      Log Out
+    </button>
+  </div>
+</div>
             </>
           ) : (
             <>
@@ -234,7 +287,11 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Menu Button */}
-        <button className="md:hidden text-gray-600">
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="md:hidden text-white focus:outline-none"
+          aria-label="Toggle menu"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
@@ -242,14 +299,123 @@ export default function Navbar() {
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
+            {isMobileMenuOpen ? (
+              // Close (X) icon
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            ) : (
+              // Hamburger icon
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            )}
           </svg>
         </button>
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 w-full bg-blue-300 shadow-lg z-20">
+            <div className="container mx-auto px-4 py-4 flex flex-col space-y-3">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `px-4 py-2 rounded-md font-medium ${
+                    isActive
+                      ? "bg-blue-900/50 text-white"
+                      : "text-blue-100 hover:bg-blue-900/30"
+                  }`
+                }
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Home
+              </NavLink>
+              <NavLink
+                to="/allJobs"
+                className={({ isActive }) =>
+                  `px-4 py-2 rounded-md font-medium ${
+                    isActive
+                      ? "bg-blue-900/50 text-white"
+                      : "text-blue-100 hover:bg-blue-900/30"
+                  }`
+                }
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                All Jobs
+              </NavLink>
+
+              {user ? (
+                <>
+                  <NavLink
+                    to="/addJobs"
+                    className={({ isActive }) =>
+                      `px-4 py-2 rounded-md font-medium ${
+                        isActive
+                          ? "bg-blue-900/50 text-white"
+                          : "text-blue-100 hover:bg-blue-900/30"
+                      }`
+                    }
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Add a Job
+                  </NavLink>
+                  <NavLink
+                    to="/my-accepted-tasks"
+                    className={({ isActive }) =>
+                      `px-4 py-2 rounded-md font-medium ${
+                        isActive
+                          ? "bg-blue-900/50 text-white"
+                          : "text-blue-100 hover:bg-blue-900/30"
+                      }`
+                    }
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    My Accepted Tasks
+                  </NavLink>
+
+                  {/* User Info & Logout */}
+                  <div className="pt-2 border-t border-blue-700/50">
+                    <div className="px-4 py-2 text-sm text-blue-100">
+                      <div>{user.displayName || user.email.split("@")[0]}</div>
+                      <div className="text-xs opacity-75">{user.email}</div>
+                    </div>
+                    <button
+                      onClick={() => {
+                        handleSignOut();
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className="w-full text-left px-4 py-2 text-sm text-red-300 hover:bg-red-900/20 rounded-md"
+                    >
+                      Log Out
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    className="px-4 py-2 text-blue-100 hover:bg-blue-900/30 rounded-md font-medium"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/register"
+                    className="px-4 py-2 bg-white text-blue-700 rounded-md font-medium hover:bg-blue-50"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Register
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );
