@@ -185,202 +185,11 @@
 
 // export default Home;
 
-// src/components/Home/Home.jsx
-// import { useEffect, useState } from 'react';
-// import { Link } from 'react-router';
-// import axios from 'axios';
-// import { toast } from 'react-toastify';
-
-// const Home = () => {
-//   const [jobs, setJobs] = useState([]); // ✅ Initial value is []
-//   const [loading, setLoading] = useState(true);
-
-//   useEffect(() => {
-//     const fetchJobs = async () => {
-//       try {
-//         const res = await axios.get('/jobs/latest');
-//         // ✅ Safely handle response: ensure it's an array
-//         if (Array.isArray(res.data)) {
-//           setJobs(res.data.slice(0, 6)); // latest 6
-//         } else {
-//           console.warn('API returned non-array:', res.data);
-//           setJobs([]);
-//         }
-//       } catch (err) {
-//         console.error('Fetch jobs error:', err);
-//         toast.error('Failed to load jobs. Is the server running?');
-//         setJobs([]); // ✅ fallback to empty array
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchJobs();
-//   }, []);
-
-//   // ✅ Loading spinner
-//   if (loading) {
-//     return (
-//       <div className="flex justify-center items-center h-64">
-//         <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-blue-600"></div>
-//         <span className="ml-3 text-gray-700">Loading jobs...</span>
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <div className="min-h-screen bg-gray-50">
-//       {/* Hero Banner */}
-//       <section className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-20 md:py-28 text-center px-4 relative overflow-hidden">
-//         <div className="absolute inset-0 opacity-10">
-//           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-yellow-300 rounded-full filter blur-xl"></div>
-//           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-300 rounded-full filter blur-xl"></div>
-//         </div>
-
-//         <div className="relative z-10 max-w-4xl mx-auto">
-//           <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
-//             Find Top Freelancers or Post a Job
-//           </h1>
-//           <p className="text-lg md:text-xl mb-8 opacity-90">
-//             A trusted marketplace connecting skilled professionals with real-world projects — fast, secure, and free to join.
-//           </p>
-//           <div className="flex flex-col sm:flex-row justify-center gap-4">
-//             <Link
-//               to="/allJobs"
-//               className="px-8 py-3 bg-white text-blue-700 font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
-//             >
-//               Browse Jobs
-//             </Link>
-//             <Link
-//               to="/addJob"
-//               className="px-8 py-3 bg-transparent border-2 border-white text-white font-semibold rounded-xl hover:bg-white/10 backdrop-blur-sm transition-colors"
-//             >
-//               Post a Job →
-//             </Link>
-//           </div>
-//         </div>
-//       </section>
-
-//       {/* Latest Jobs */}
-//       <section className="py-16 px-4 bg-white">
-//         <div className="max-w-7xl mx-auto">
-//           <div className="text-center mb-12">
-//             <h2 className="text-3xl font-bold text-gray-800 mb-4">Latest Opportunities</h2>
-//             <p className="text-gray-600 max-w-2xl mx-auto">
-//               Handpicked jobs posted recently. New gigs added every minute!
-//             </p>
-//           </div>
-
-//           {jobs && jobs.length > 0 ? (
-//             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-//               {jobs.map((job) => (
-//                 <div
-//                   key={job._id || job.title}
-//                   className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100"
-//                 >
-//                   {job.coverImage && (
-//                     <div className="h-48 overflow-hidden">
-//                       <img
-//                         src={job.coverImage}
-//                         alt={job.title}
-//                         className="w-full h-full object-cover"
-//                         onError={(e) => {
-//                           e.target.onerror = null;
-//                           e.target.src = 'https://via.placeholder.com/400x200/e2e8f0/64748b?text=No+Image';
-//                         }}
-//                       />
-//                     </div>
-//                   )}
-//                   <div className="p-6">
-//                     <span className="inline-block px-3 py-1 text-xs font-semibold text-indigo-600 bg-indigo-50 rounded-full mb-3">
-//                       {job.category || 'General'}
-//                     </span>
-//                     <h3 className="text-xl font-bold text-gray-800 mb-2 line-clamp-1">
-//                       {job.title}
-//                     </h3>
-//                     <p className="text-gray-600 text-sm mb-3">
-//                       <span className="font-medium">Posted by:</span> {job.postedBy || 'Anonymous'}
-//                     </p>
-//                     <p className="text-gray-700 mb-4 line-clamp-3">
-//                       {job.summary || 'No description provided.'}
-//                     </p>
-//                     <Link
-//                       to={`/allJobs/${job._id}`}
-//                       className="inline-flex items-center text-indigo-600 font-medium hover:text-indigo-800 transition-colors"
-//                     >
-//                       View Details →
-//                     </Link>
-//                   </div>
-//                 </div>
-//               ))}
-//             </div>
-//           ) : (
-//             <div className="text-center py-16">
-//               <div className="text-5xl mb-6">📭</div>
-//               <h3 className="text-2xl font-semibold text-gray-700 mb-3">No Jobs Yet</h3>
-//               <p className="text-gray-500 max-w-md mx-auto mb-6">
-//                 Be the first to post a job and attract top talent from around the world.
-//               </p>
-//               <Link
-//                 to="/addJob"
-//                 className="px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors shadow-md"
-//               >
-//                 Post Your First Job
-//               </Link>
-//             </div>
-//           )}
-//         </div>
-//       </section>
-
-//       {/* Static Sections */}
-//       <section className="py-16 bg-gray-50">
-//         <div className="max-w-7xl mx-auto px-4">
-//           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-//             {/* Top Categories */}
-//             <div className="bg-white p-8 rounded-xl shadow-md">
-//               <h2 className="text-2xl font-bold text-gray-800 mb-6">Top Categories</h2>
-//               <div className="grid grid-cols-2 gap-4">
-//                 {[
-//                   { name: 'Web Development', icon: '💻' },
-//                   { name: 'Graphics Designing', icon: '🎨' },
-//                   { name: 'Digital Marketing', icon: '📈' },
-//                   { name: 'Content Writing', icon: '✍️' },
-//                   { name: 'Video Editing', icon: '🎥' },
-//                   { name: 'Mobile Apps', icon: '📱' },
-//                 ].map((cat, i) => (
-//                   <div
-//                     key={i}
-//                     className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
-//                   >
-//                     <span className="text-2xl">{cat.icon}</span>
-//                     <span className="font-medium">{cat.name}</span>
-//                   </div>
-//                 ))}
-//               </div>
-//             </div>
-
-//             {/* About The Platform */}
-//             <div className="bg-white p-8 rounded-xl shadow-md">
-//               <h2 className="text-2xl font-bold text-gray-800 mb-6">About FreelanceHub</h2>
-//               <p className="text-gray-700 mb-4">
-//                 We connect businesses with top freelance talent worldwide. Post a job, find a pro, and get your project done — fast and easy.
-//               </p>
-//               <p className="text-gray-700">
-//                 Our platform is designed for simplicity, security, and speed — no hidden fees, no complicated contracts.
-//               </p>
-//             </div>
-//           </div>
-//         </div>
-//       </section>
-//     </div>
-//   );
-// };
-
-// export default Home;
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { Link } from "react-router";
+import bannerImg from '../../assets/bannar1.png';
 
 export default function Home() {
   const [jobs, setJobs] = useState([]);
@@ -402,9 +211,16 @@ export default function Home() {
 
   return (
     <div className="container mx-auto px-4 py-10">
+      
+
       {/* Banner */}
-      <section className="text-center mb-12">
-        {/* Inside banner section: */}
+      <section
+        className="text-center w-full mb-12 bg-cover bg-center bg-no-repeat bg-gray-100 py-3"
+        style={{ backgroundImage: `url(${bannerImg})`,
+        padding:'10%'
+     }}
+      >
+        
         <motion.h1
           className="text-5xl font-bold mb-4"
           initial={{ opacity: 0, y: 20 }}
@@ -414,7 +230,7 @@ export default function Home() {
           Find Reliable Freelancers Fast
         </motion.h1>
         <motion.p
-          className="mb-6 text-gray-600"
+          className="mb-6 text-gray-950"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.6 }}
@@ -436,6 +252,7 @@ export default function Home() {
             Explore Jobs
           </Link>
         </motion.div>
+        
       </section>
 
       {/* Latest Jobs */}

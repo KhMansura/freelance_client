@@ -108,7 +108,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="navbar bg-white shadow-sm px-4 py-3">
+    <nav className="navbar bg-gradient-to-r from-blue-200 via-blue-400 to-blue-200 shadow-md px-4 py-3">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
 
