@@ -264,7 +264,7 @@ export default function Home() {
         </div>
       </section>
       {/* Two static sections */}
-      <section className="grid md:grid-cols-2 gap-6">
+      {/* <section className="grid md:grid-cols-2 gap-6">
         <div className="p-6 bg-white rounded shadow">
           <h3 className="font-semibold text-xl mb-2">Top Categories</h3>
           <div className="grid grid-cols-3 gap-3">
@@ -283,17 +283,97 @@ export default function Home() {
             accept tasks easily.
           </p>
         </div>
-      </section>
+      </section> */}
+
+      {/* Two Enchanted Static Sections */}
+<section className="grid md:grid-cols-2 gap-6 mt-16">
+  {/* ✨ Section 1: Top Categories (as Services) */}
+  <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition p-6">
+    <div className="flex items-center mb-5">
+      <div className="bg-blue-100 p-2 rounded-lg mr-3">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm9-12a2 2 0 01-2-2V5a2 2 0 012-2h4a2 2 0 012 2v2a2 2 0 01-2 2h-4z" />
+        </svg>
+      </div>
+      <h3 className="text-xl font-bold text-gray-800">Top Categories</h3>
+    </div>
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {[
+        { name: "Web Development", icon: "💻", desc: "Frontend, Backend, Full-stack" },
+        { name: "Digital Marketing", icon: "📈", desc: "SEO, Ads, Analytics" },
+        { name: "Graphic Design", icon: "🎨", desc: "Branding, UI/UX, Print" },
+        { name: "Writing & Translation", icon: "✍️", desc: "Content, Copy, Localization" },
+      ].map((cat, i) => (
+        <div 
+          key={i} 
+          className="flex items-start p-3 rounded-lg bg-gray-50 hover:bg-blue-50 transition group"
+        >
+          <span className="text-xl mr-3 mt-0.5 group-hover:text-blue-600 transition">
+            {cat.icon}
+          </span>
+          <div>
+            <h4 className="font-semibold text-gray-800">{cat.name}</h4>
+            <p className="text-sm text-gray-600 mt-1">{cat.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <Link 
+      to="/allJobs" 
+      className="mt-4 inline-flex items-center text-blue-600 font-medium hover:text-blue-800 group"
+    >
+      Browse all categories
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1 group-hover:translate-x-1 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+      </svg>
+    </Link>
+  </div>
+
+  {/* ✨ Section 2: About Freelance MarketPlace (Why Choose Us) */}
+  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-100">
+    <div className="flex items-center mb-5">
+      <div className="bg-indigo-100 p-2 rounded-lg mr-3">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+      </div>
+      <h3 className="text-xl font-bold text-gray-800">Why FreelanceHub?</h3>
+    </div>
+
+    <ul className="space-y-4 mb-6">
+      {[
+        { title: "Fast Matching", desc: "Get matched with the right freelancer in under 24 hours." },
+        { title: "Verified Talent", desc: "All freelancers are manually reviewed for quality & reliability." },
+        { title: "Secure Collaboration", desc: "Built-in messaging and milestone tracking for smooth workflows." },
+      ].map((item, i) => (
+        <li key={i} className="flex">
+          <span className="flex-shrink-0 h-5 w-5 rounded-full bg-blue-500 flex items-center justify-center mr-3 mt-0.5">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+            </svg>
+          </span>
+          <div>
+            <h4 className="font-semibold text-gray-800">{item.title}</h4>
+            <p className="text-gray-600 text-sm">{item.desc}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <div className="bg-white rounded-lg p-4 border border-gray-200">
+      <p className="text-gray-700 italic">
+        <span className="font-semibold text-gray-800">“</span>
+        FreelanceHub connects skilled freelancers and clients in a seamless environment where projects come alive.
+        <span className="font-semibold text-gray-800">”</span>
+      </p>
+    </div>
+  </div>
+</section>
 
       {/* Static Section: About */}
-      {/* <section className="mt-16 text-center">
-        <h2 className="text-2xl font-semibold mb-4">About FreelanceHub</h2>
-        <p className="max-w-2xl mx-auto text-gray-600">
-          FreelanceHub connects skilled freelancers and clients in a seamless
-          environment where projects come alive.
-        </p>
-      </section> */}
-      {/* About FreelanceHub — Enhanced */}
+      {/* About FreelanceHub */}
       <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4">
           {/* Header */}

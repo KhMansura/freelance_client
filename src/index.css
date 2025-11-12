@@ -1,23 +1,31 @@
-@import "tailwindcss";
+/* @import "tailwindcss";
 @plugin "daisyui" {
   themes: light --default, dark --prefersdark;
   themes: light --default;
+} */
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: winter --default, night --prefersdark;
 }
 
-@plugin "daisyui/theme" {
+@custom-variant dark (&:where([data-theme=night], [data-theme=night] *));
+
+/* @plugin "daisyui/theme" {
   name: "light";
   default: true;
   --color-primary: blue;
   --color-secondary: teal;
-}
+} */
 
 .btn-primary {
-  @apply bg-gradient-to-r from-[#32EE3] to-[#9F2F2] border-none text-white
-
-
+  @apply bg-gradient-to-r from-[#32EE3] to-[#9F2F2] border-none text-white;
 }
-.btn-primary:hover{
+.btn-primary:hover {
   @apply opacity-90;
+}
+/* Smooth theme transition */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* src/index.css */
@@ -41,14 +49,14 @@ a {
 }
 
 /* Navbar */
-.navbar {
+/* .navbar {
   @apply bg-white shadow-sm;
-}
+} */
 
 /* Footer */
-footer {
+/* footer {
   @apply bg-gray-800 text-white py-6 text-center;
-}
+} */
 
 /* Job Card */
 .job-card {
@@ -84,4 +92,62 @@ footer {
   .job-card img {
     @apply h-32;
   }
+}
+
+/* === Light theme (default) === */
+html[data-theme="winter"] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f3f4f6;
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --navbar-bg: #ffffff;
+  --footer-bg: #1f2937;
+}
+
+/* === Dark theme === */
+html[data-theme="night"] {
+  --bg-primary: #1e293b;
+  --bg-secondary: #0f172a;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --navbar-bg: #0f172a;
+  --footer-bg: #020617;
+}
+
+/* Apply variables globally */
+body {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar {
+  background-color: var(--navbar-bg) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+  background-color: var(--footer-bg) !important;
+  color: var(--text-primary) !important;
+}
+
+.job-card {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+.job-card h3 {
+  color: var(--text-primary) !important;
+}
+
+.job-card p {
+  color: var(--text-secondary) !important;
+}
+
+.btn-primary {
+  background-color: #3b82f6 !important;
+}
+
+html[data-theme="night"] .btn-primary {
+  background-color: #60a5fa !important;
 }

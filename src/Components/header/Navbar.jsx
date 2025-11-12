@@ -83,8 +83,34 @@ import { Link, NavLink, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 // import { useAuth } from "../hooks/useAuth"; // ← You already have this hook
 import logo from "../../assets/logo.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import ThemeToggle from "../ThemeToggle";
 export default function Navbar() {
+  // const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+
+  // useEffect(() => {
+  //   const html = document.querySelector("html");
+  //   html.setAttribute("data-theme", theme);
+  //   localStorage.setItem("theme", theme);
+  // }, [theme]);
+
+  // const handleTheme = (checked) => {
+  //   // console.log(checked)
+  //   setTheme(checked ? "dark" : "light");
+  // };
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "winter");
+
+useEffect(() => {
+  document.documentElement.setAttribute("data-theme", theme);
+}, [theme]); // ✅ Don’t save in useEffect — do it in handler
+
+const handleTheme = (e) => {
+  const newTheme = e.target.checked ? "night" : "winter";
+  setTheme(newTheme);
+  localStorage.setItem("theme", newTheme);
+};
+
+
   const { user, loading, signOutUser } = useAuth();
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -198,7 +224,7 @@ export default function Navbar() {
                 </button>
 
                 {/* Dropdown */}
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden group-hover:block z-10 border">
+              {/* <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden group-hover:block z-10 border">
                   <div className="px-4 py-2 text-sm text-gray-700 border-b">
                     {user.displayName}
                     <br />
@@ -210,63 +236,76 @@ export default function Navbar() {
                   >
                     Log Out
                   </button>
-                </div>
+                </div> */}
               {/* </div> */}
+
+              {/* <input
+                onChange={(e) => handleTheme(e.target.checked)}
+                type="checkbox"
+                defaultChecked={localStorage.getItem("theme") === "night"}
+                className="toggle"
+              /> */}
+                <input
+      type="checkbox"
+      className="toggle toggle-primary"
+      checked={theme === "night"}
+      onChange={handleTheme}
+    />
               {/* Avatar Dropdown */}
-<div className="relative group">
-  <button 
-    className="flex items-center space-x-2 focus:outline-none"
-    aria-label="User menu"
-  >
-    {/* ✅ Avatar with fallback */}
-    <div className="relative">
-      {user.photoURL ? (
-        <img
-          src={user.photoURL}
-          alt={user.displayName || "User"}
-          className="w-8 h-8 rounded-full border border-white/30 object-cover"
-          onError={(e) => {
-            // Fallback if photoURL broken
-            e.target.style.display = 'none';
-            e.target.nextSibling.style.display = 'flex';
-          }}
-        />
-      ) : null}
+              <div className="relative group">
+                <button
+                  className="flex items-center space-x-2 focus:outline-none"
+                  aria-label="User menu"
+                >
+                  {/* ✅ Avatar with fallback */}
+                  <div className="relative">
+                    {user.photoURL ? (
+                      <img
+                        src={user.photoURL}
+                        alt={user.displayName || "User"}
+                        className="w-8 h-8 rounded-full border border-white/30 object-cover"
+                        onError={(e) => {
+                          // Fallback if photoURL broken
+                          e.target.style.display = "none";
+                          e.target.nextSibling.style.display = "flex";
+                        }}
+                      />
+                    ) : null}
 
-      {/* Fallback: Initials circle (always rendered, hidden by default) */}
-      <div 
-        className="absolute inset-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-medium"
-        style={{ display: user.photoURL ? 'none' : 'flex' }}
-      >
-        {(user.displayName || user.email)
-          .split(/\s+/)
-          .map(n => n[0])
-          .join('')
-          .toUpperCase()
-          .slice(0, 2)}
-      </div>
-    </div>
+                    {/* Fallback: Initials circle (always rendered, hidden by default) */}
+                    <div
+                      className="absolute inset-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-medium"
+                      style={{ display: user.photoURL ? "none" : "flex" }}
+                    >
+                      {(user.displayName || user.email)
+                        .split(/\s+/)
+                        .map((n) => n[0])
+                        .join("")
+                        .toUpperCase()
+                        .slice(0, 2)}
+                    </div>
+                  </div>
 
-    <span className="hidden md:inline text-gray-700 font-medium">
-      {user.displayName || user.email.split("@")[0]}
-    </span>
-  </button>
+                  <span className="hidden md:inline text-gray-700 font-medium">
+                    {user.displayName || user.email.split("@")[0]}
+                  </span>
+                </button>
 
-  {/* Dropdown */}
-  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden group-hover:block z-10 border">
-    <div className="px-4 py-2 text-sm text-gray-700 border-b">
-      {user.displayName}
-      <br />
-      <span className="text-xs text-gray-500">{user.email}</span>
-    </div>
-    <button
-      onClick={handleSignOut}
-      className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
-    >
-      Log Out
-    </button>
-  </div>
-</div>
+                {/* Dropdown */}
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden group-hover:block z-10 border">
+                  <div className="px-4 py-2 text-sm text-gray-700 border-b">
+                    {user.displayName}
+                    <br />
+                    <span className="text-xs text-gray-500">{user.email}</span>
+                  </div>
+                  <button
+                    onClick={handleSignOut}
+                    className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                  >
+                    Log Out
+                  </button>
+                </div>
+              </div>
             </>
           ) : (
             <>
