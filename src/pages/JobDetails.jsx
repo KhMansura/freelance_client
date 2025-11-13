@@ -55,9 +55,15 @@ const JobDetails = () => {
 
     try {
       // ✅ Use correct route: POST /accept-job/:id
-      await axios.post(`http://localhost:3000/accept-job/${id}`, {
-        userEmail: user.email, // ✅ matches server's `req.body.userEmail`
-      });
+    //   await axios.post(`http://localhost:3000/accept-job/${id}`, {
+    //     userEmail: user.email, // ✅ matches server's `req.body.userEmail`
+    //   });
+       const token = await user.getIdToken(); // 🔑 Get token
+    await axios.post(
+      `${import.meta.env.VITE_API_URL}/accept-job/${job._id}`,
+      {},
+      { headers: { Authorization: `Bearer ${token}` } } // 🔐 Send token
+    );
       toast.success("Job accepted — check My Accepted Tasks");
       navigate("/my-accepted-tasks");
     } catch (err) {
@@ -87,12 +93,25 @@ const JobDetails = () => {
     // if (!confirm("Delete this job? This cannot be undone.")) return;
 
     try {
-      await axios.delete(`http://localhost:3000/jobs/${job._id}`);
-      toast.success("Job deleted");
-      navigate("/allJobs");
-    } catch (err) {
-      console.error(err);
-      toast.error("Failed to delete job");
+    //   await axios.delete(`http://localhost:3000/jobs/${job._id}`);
+      
+      
+    //   toast.success("Job deleted");
+    //   navigate("/allJobs");
+    // } catch (err) {
+    //   console.error(err);
+    //   toast.error("Failed to delete job");
+    const token = await user.getIdToken(); // 🔑 Get token
+    await axios.delete(
+      `${import.meta.env.VITE_API_URL}/jobs/${job._id}`,
+      { headers: { Authorization: `Bearer ${token}` } } // 🔐 Send token
+    );
+    toast.success("Job deleted");
+    navigate("/allJobs");
+  } catch (err) {
+    console.error("Delete error:", err.response?.data || err.message);
+    const msg = err.response?.data?.error || "Failed to delete job";
+    toast.error(msg);
     }
   };
 
