@@ -60,13 +60,14 @@ import Register from './Components/Register/Register';
 import Login from './pages/Login';
 import JobDetails from './pages/JobDetails';
 import AddJobs from './pages/AddJobs';
-import MyAddedJobs from './pages/MyAddedJobs';
+import MyAddedJobs from './pages/MyPostedJobs';
 import MyAcceptedTasks from './pages/MyAcceptedTasks';
 import NotFound from './pages/NotFound';
 import PrivateRoute from './Components/PrivateRoute';
 import UpdateJob from './pages/UpdateJob';
 import TermsOfService from './pages/TermsOfServices';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import MyPostedJobs from './pages/MyPostedJobs';
 
 
 
@@ -81,7 +82,7 @@ const router = createBrowserRouter([
       { path: 'allJobs', element: <PrivateRoute><AllJobs /></PrivateRoute> },
       { path: 'allJobs/:id', element: <PrivateRoute><JobDetails /></PrivateRoute> },
       { path: 'addJobs', element: <PrivateRoute><AddJobs /></PrivateRoute> },
-      { path: 'myAddedJobs', element: <PrivateRoute><MyAddedJobs /></PrivateRoute> },
+      { path: 'myPostedJobs', element: <PrivateRoute><MyPostedJobs></MyPostedJobs></PrivateRoute> },
       { path: 'my-accepted-tasks', element: <PrivateRoute><MyAcceptedTasks /></PrivateRoute> },
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },

@@ -1,9 +1,8 @@
 # 🛠️ Freelance MarketPlace  
 > A full-stack freelance job platform inspired by modern design trends from [uiverse.io](https://uiverse.io/) and [ThemeForest](https://themeforest.net/).
 
-[![Live Site](https://img.shields.io/badge/Live_Site-Netlify-00C7B7?logo=netlify)](https://freelancehub.netlify.app)
-[![Server API](https://img.shields.io/badge/API_Server-Vercel-04C35C?logo=vercel)](https://freelance-api.vercel.app)
-[![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
+[![Live Site](https://delicate-trifle-73043e.netlify.app/)](https://delicate-trifle-73043e.netlify.app/)
+
 
 🔗 **Live Demo**: [https://freelancehub.netlify.app](https://freelancehub.netlify.app)  
 🗃️ **Server Repo**: [github.com/yourname/freelance_server](https://github.com/yourname/freelance_server)

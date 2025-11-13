@@ -193,15 +193,27 @@ import bannerImg from "../../assets/bannar1.png";
 
 export default function Home() {
   const [jobs, setJobs] = useState([]);
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_API_URL}/jobs/latest`)
-      .then((res) => {
-        console.log("Response:", res.data); // 👀 See what the backend sends
-        setJobs(res.data);
-      })
-      .catch(console.error);
-  }, []);
+//   useEffect(() => {
+//     axios
+//       .get(`${import.meta.env.VITE_API_URL}/jobs/latest`)
+//       .then((res) => {
+//         console.log("Response:", res.data); // 👀 See what the backend sends
+//         setJobs(res.data);
+//       })
+//       .catch(console.error);
+//   }, []);
+const [loading, setLoading] = useState(true);
+useEffect(() => {
+  axios.get(`${import.meta.env.VITE_API_URL}/jobs/latest`)
+    .then(res => {
+      setJobs(res.data);
+      setLoading(false);
+    })
+    .catch(err => {
+      console.error(err);
+      setLoading(false);
+    });
+}, []);
 
   return (
     <div className="container mx-auto px-4 py-10">
@@ -246,8 +258,14 @@ export default function Home() {
       {/* Latest Jobs */}
       <section>
         <h2 className="text-3xl font-bold mb-6 text-center">Latest Jobs</h2>
+        {loading ? (
+    <div className="flex justify-center py-12">
+      <span className="loading loading-spinner loading-lg text-blue-600"></span>
+    </div>
+  ) : (
         <div className="grid md:grid-cols-3 gap-6">
-          {Array.isArray(jobs) && jobs.length > 0 ? (
+          {Array.isArray(jobs) && 
+          jobs.length > 0 ? (
             jobs.map((job) => (
               <div key={job._id} className="job-card">
                 <img src={job.coverImage} alt={job.title} />
@@ -262,6 +280,7 @@ export default function Home() {
             <p className="text-center text-gray-500">No jobs found.</p>
           )}
         </div>
+  )}
       </section>
       {/* Two static sections */}
       {/* <section className="grid md:grid-cols-2 gap-6">

@@ -86,23 +86,11 @@ import logo from "../../assets/logo.png";
 import { useEffect, useState } from "react";
 import ThemeToggle from "../ThemeToggle";
 export default function Navbar() {
-  // const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
-
-  // useEffect(() => {
-  //   const html = document.querySelector("html");
-  //   html.setAttribute("data-theme", theme);
-  //   localStorage.setItem("theme", theme);
-  // }, [theme]);
-
-  // const handleTheme = (checked) => {
-  //   // console.log(checked)
-  //   setTheme(checked ? "dark" : "light");
-  // };
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "winter");
 
 useEffect(() => {
   document.documentElement.setAttribute("data-theme", theme);
-}, [theme]); // ✅ Don’t save in useEffect — do it in handler
+}, [theme]); 
 
 const handleTheme = (e) => {
   const newTheme = e.target.checked ? "night" : "winter";
@@ -192,6 +180,18 @@ const handleTheme = (e) => {
               >
                 Add a Job
               </NavLink>
+                  <NavLink
+      to="/myPostedJobs"
+      className={({ isActive }) =>
+        `px-3 py-2 rounded-md transition-colors ${
+          isActive
+            ? "text-blue-600 font-medium"
+            : "text-gray-600 hover:text-gray-900"
+        }`
+      }
+    >
+      My Posted Jobs
+    </NavLink>
               <NavLink
                 to="/my-accepted-tasks"
                 className={({ isActive }) =>
@@ -204,6 +204,7 @@ const handleTheme = (e) => {
               >
                 My Accepted Tasks
               </NavLink>
+              
 
               {/* Avatar Dropdown */}
               {/* <div className="relative group">
@@ -403,6 +404,19 @@ const handleTheme = (e) => {
                   >
                     Add a Job
                   </NavLink>
+                      <NavLink
+      to="/myPostedJobs"
+      className={({ isActive }) =>
+        `px-4 py-2 rounded-md font-medium ${
+          isActive
+            ? "bg-blue-900/50 text-white"
+            : "text-blue-100 hover:bg-blue-900/30"
+        }`
+      }
+      onClick={() => setIsMobileMenuOpen(false)}
+    >
+      My Posted Jobs
+    </NavLink>
                   <NavLink
                     to="/my-accepted-tasks"
                     className={({ isActive }) =>

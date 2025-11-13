@@ -65,7 +65,7 @@ const UpdateJob = () => {
         }
       );
       toast.success("Job updated!");
-      navigate("/myAddedJobs");
+      navigate("/myPostedJobs");
     } catch (err) {
       console.error("Update error:", err.response?.data || err);
       toast.error(err.response?.data?.error || "Update failed");

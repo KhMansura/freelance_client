@@ -29,13 +29,7 @@ export default function AddJobs() {
       userEmail: user.email,
     };
     try {
-//       await axios.post(`${import.meta.env.VITE_API_URL}/jobs`, newJob);
-//       toast.success("Job added successfully!");
-//       setForm({ title: "", category: "", summary: "", coverImage: "" });
-//     } catch (err) {
-//       toast.error("Failed to add job.");
-//     }
-//   };
+
 const token = await user.getIdToken();
       await axios.post(
         `${import.meta.env.VITE_API_URL}/jobs`,
@@ -69,7 +63,32 @@ const token = await user.getIdToken();
           <option>Digital Marketing</option>
         </select>
         <textarea placeholder="Job Summary" value={form.summary}
-          onChange={(e) => setForm({ ...form, summary: e.target.value })} className="textarea textarea-bordered w-full" required />
+          onChange={(e) => setForm({ ...form, summary: e.target.value })}
+           className="textarea textarea-bordered w-full" required />
+      <div className="space-y-2">
+        <div>
+          <label className="label">
+            <span className="label-text">Posted By</span>
+          </label>
+          <input
+            type="text"
+            value={user.displayName || user.email.split("@")[0]}
+            className="input input-bordered w-full bg-gray-100"
+            readOnly
+          />
+        </div>
+        <div>
+          <label className="label">
+            <span className="label-text">Your Email</span>
+          </label>
+          <input
+            type="email"
+            value={user.email}
+            className="input input-bordered w-full bg-gray-100"
+            readOnly
+          />
+        </div>
+      </div> 
         <input type="text" placeholder="Image URL" value={form.coverImage}
           onChange={(e) => setForm({ ...form, coverImage: e.target.value })} className="input input-bordered w-full" required />
         <button className="btn btn-primary w-full">Add Job</button>

@@ -5,7 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
-export default function MyAddedJobs() {
+export default function MyPostedJobs() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [jobs, setJobs] = useState([]);
@@ -66,7 +66,12 @@ export default function MyAddedJobs() {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-6">My Added Jobs</h1>
-      {jobs.length === 0 ? (
+      {loading ? (
+      <div className="flex justify-center py-12">
+        <span className="loading loading-spinner loading-lg text-blue-600"></span>
+      </div>
+    ) :
+      jobs.length === 0 ? (
         <p className="text-gray-500">You haven’t posted any jobs yet.</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -87,7 +92,7 @@ export default function MyAddedJobs() {
                   onClick={() => navigate(`/updateJob/${job._id}`)}
                   className="btn btn-sm btn-secondary"
                 >
-                  Edit
+                  Update
                 </button>
                 <button
                   onClick={() => confirmDelete(job._id)}
