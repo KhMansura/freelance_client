@@ -38,15 +38,30 @@ const UpdateJob = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await axios.put(`http://localhost:3000/jobs/${id}`, form);
-      toast.success("Job updated!");
-      navigate(`/allJobs/${id}`);
-    } catch (err) {
-      console.error(err);
-      toast.error("Failed to update job");
-    }
-  };
+//     try {
+//       await axios.put(`http://localhost:3000/jobs/${id}`, form);
+//       toast.success("Job updated!");
+//       navigate(`/allJobs/${id}`);
+//     } catch (err) {
+//       console.error(err);
+//       toast.error("Failed to update job");
+//     }
+//   };
+if (!user) return toast.error("Login required");
+  
+  try {
+    const token = await user.getIdToken();
+    await axios.put(
+      `${import.meta.env.VITE_API_URL}/jobs/${jobId}`,
+      form,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    toast.success("Job updated!");
+    navigate("/myAddedJobs");
+  } catch (err) {
+    toast.error(err.response?.data?.error || "Update failed");
+  }
+};
 
   if (loading) return <div className="loader">Loading...</div>;
 

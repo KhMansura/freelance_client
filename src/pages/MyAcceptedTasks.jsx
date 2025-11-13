@@ -55,24 +55,50 @@ const fetchTasks = async () => {
 //     }
 //   };
 
+// const handleDoneOrCancel = async (taskId) => {
+//   if (!taskId) return toast.error("Invalid task ID");
+
+//   try {
+//     // ✅ Use correct route: /accepted-tasks/:id (with hyphen)
+//     await axios.delete(`http://localhost:3000/accepted-tasks/${taskId}`);
+    
+//     setTasks(prev => prev.filter(t => t._id !== taskId));
+//     toast.success("Task removed");
+//   } catch (err) {
+//     console.error("Delete task error:", err.response?.data || err.message);
+//     const msg = err.response?.data?.error || "Failed to remove task";
+//     toast.error(msg);
+//   }
+// };
 const handleDoneOrCancel = async (taskId) => {
+  if (!user) return toast.error("You must be logged in");
   if (!taskId) return toast.error("Invalid task ID");
 
   try {
-    // ✅ Use correct route: /accepted-tasks/:id (with hyphen)
-    await axios.delete(`http://localhost:3000/accepted-tasks/${taskId}`);
-    
-    setTasks(prev => prev.filter(t => t._id !== taskId));
-    toast.success("Task removed");
+    const token = await user.getIdToken(); // ✅ get JWT token from Firebase
+
+    await axios.delete(
+      `${import.meta.env.VITE_API_URL || "http://localhost:3000"}/accepted-tasks/${taskId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // ✅ send token in request header
+        },
+      }
+    );
+
+    // ✅ update UI instantly
+    setTasks((prev) => prev.filter((t) => t._id !== taskId));
+    toast.success("Removed from your tasks");
   } catch (err) {
-    console.error("Delete task error:", err.response?.data || err.message);
-    const msg = err.response?.data?.error || "Failed to remove task";
-    toast.error(msg);
+    console.error("Delete error:", err.response?.data || err.message);
+    toast.error(err.response?.data?.error || "Action failed");
   }
 };
 
+
   if (loading) return <div className="loader">Loading...</div>;
-  if (!user) return <div className="container mx-auto px-4 py-8">Please log in to see your accepted tasks.</div>;
+  if (!user) return <div className="container mx-auto px-4 py-8">
+    Please log in to see your accepted tasks.</div>;
 
   return (
     <div className="container mx-auto px-4 py-8">
