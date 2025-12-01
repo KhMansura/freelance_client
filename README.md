@@ -4,7 +4,7 @@
 [![Live Site](https://delicate-trifle-73043e.netlify.app/)](https://delicate-trifle-73043e.netlify.app/)
 
 
-🔗 **Live Demo**: [https://delicate-trifle-73043e.netlify.app/](https://delicate-trifle-73043e.netlify.app/)  
+🔗 **Live Demo**: [https://freelance-hub-a10.netlify.app/](https://freelance-hub-a10.netlify.app/)  
 🗃️ **Server Repo**: [https://github.com/KhMansura/freelance_server](https://github.com/KhMansura/freelance_server)
 
 ---
