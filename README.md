@@ -9,7 +9,7 @@
 ---
 
 ## 🖼️ Screenshot > 
-![Project Screenshot]()
+![Project Screenshot](../../Projects11/freelance_client/public/10e78658-8136-4eb0-88a7-bf9e3f069e4b.png)
 
 ## ✨ Key Features
   ### 🔐 Authentication
