@@ -1,39 +1,39 @@
 # 🛠️ Freelance MarketPlace  
-> A full-stack freelance job platform inspired by modern design trends from [uiverse.io](https://uiverse.io/) and [ThemeForest](https://themeforest.net/).
-
-[![Live Site](https://delicate-trifle-73043e.netlify.app/)](https://delicate-trifle-73043e.netlify.app/)
+> A modern full‑stack freelance job platform where clients can post jobs and freelancers can accept and manage tasks. Built with MERN stack + Firebase authentication and inspired by modern UI patterns from Uiverse, ThemeForest, and DevMeetsDevs.
 
 
-🔗 **Live Demo**: [https://freelance-hub-a10.netlify.app/](https://freelance-hub-a10.netlify.app/)  
+🔗 **Live Site**: [https://freelance-hub-a10.netlify.app/](https://freelance-hub-a10.netlify.app/)  
+🗃️ **Client Repo:** https://github.com/KhMansura/freelance_client 
 🗃️ **Server Repo**: [https://github.com/KhMansura/freelance_server](https://github.com/KhMansura/freelance_server)
 
 ---
 
+## 🖼️ Screenshot > 
+![Project Screenshot]()
+
 ## ✨ Key Features
+  ### 🔐 Authentication
+- Firebase Email/Password login  
+- Google Sign‑In  
+- Toast notifications (no `alert()`)
 
-- 🔐 **Secure Firebase Authentication**  
-  Email/password + Google Sign-In — no fake `alert()` dialogs. Toast notifications via `react-toastify`.
+### 📋 Job Management
+- Create, read, update, delete jobs  
+- Users can only edit/delete their own jobs  
+- Job acceptance workflow for freelancers  
 
-- 📋 **Full CRUD Job Management**  
-  Post, view, edit, and delete jobs — with ownership validation (users can only manage their own jobs).
+### 🧑‍💻 Task Workflow
+- Accepted tasks appear in **My Tasks**  
+- Mark tasks as **Done** or **Cancel**
 
-- 🤝 **Job Acceptance Workflow**  
-  Freelancers accept jobs → appear in *“My Accepted Tasks”* (with ✅ DONE / ❌ CANCEL actions).
+### 🎨 Modern UI/UX
+- Fully responsive layout  
+- Gradient navbar, animated hero, clean cards  
+- Dark/Light theme toggle (saved in localStorage)
 
-- 🌓 **Persistent Dark/Light Theme Toggle**  
-  Inspired by *“Dark Mode, Light Mode… What's Next?”* ([uiverse.io](https://uiverse.io/blog/dark-mode-light-mode-whats-next-adaptive-ui-themes-for-2025)) — smooth, accessible, `localStorage`-backed.
-
-- 📱 **Fully Responsive UI Components**  
-  Built using design patterns from:
-  - **Footer (183)** & **Header (191)** — [devmeetsdevs.com](https://devmeetsdevs.com/)
-  - **Hero Banner (189)** & **Why Choose Us (62)** — for the “About FreelanceHub” section  
-  - **How it Works (33)** — for job flow clarity
-
-- 🛡️ **Protected Routes & Role-Based UI**  
-  Conditional rendering: Login/Register for guests; avatar, name, and task dashboard for authenticated users.
-
-- 🖼️ **Modern UI/UX**  
-  Gradient navbar, card-based job listings, SVG social icons (✅ X, ✅ Facebook, ✅ Instagram), and no lorem ipsum.
+### 🛡️ Protected Routes
+- Only logged‑in users can access dashboard pages  
+- Role‑based UI elements
 
 ---
 
@@ -50,6 +50,27 @@
 
 ---
 
+## 📦 Dependencies
+
+### **Client**
+- React  
+- React Router DOM  
+- Firebase  
+- Axios  
+- Tailwind CSS  
+- DaisyUI  
+- Framer Motion  
+- React Toastify  
+
+### **Server**
+- Express.js  
+- MongoDB  
+- CORS  
+- Dotenv  
+- Nodemon  
+
+---
+
 ## 📸 UI Highlights (Inspired by Resources)
 
 | Section | Design Source | Implementation |
@@ -62,11 +83,45 @@
 
 ---
 
-> 💡 **Note**: This project meets all grading requirements:  
-> - ✅ 15+ client commits, 8+ server commits  
-> - ✅ No `alert()` — only toast/Swal2  
-> - ✅ No lorem ipsum  
-> - ✅ Fully responsive  
-> - ✅ Environment variables for secrets  
-> - ✅ Protected routes & ownership checks
+## 🚀 How to Run the Project Locally
+
+### 1. Clone the repositories
+```bash
+git clone https://github.com/KhMansura/freelance_client.git
+git clone https://github.com/KhMansura/freelance_server.git
+2. Install dependencies
+cd freelance_client
+npm install
+
+cd ../freelance_server
+npm install
+3. Create environment variables
+Client (.env)
+VITE_apiKey=your_key
+VITE_authDomain=your_domain
+VITE_projectId=your_id
+VITE_server_url=http://localhost:5000
+Server (.env)
+PORT=5000
+MONGO_URI=your_mongo_uri
+4. Start the development servers
+npm run dev
+Server
+npm start
+5. Open in browser
+http://localhost:5173
+```
+📚 Additional Notes
+
+  - Fully responsive
+  - No lorem ipsum
+  - Secure authentication
+  - Environment variables used
+  - Meets all assignment requirements
+
+
+
+
+
+
 
