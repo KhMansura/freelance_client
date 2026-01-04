@@ -1,153 +1,150 @@
-// import React from 'react';
-
-// const Footer = () => {
-//     return (
-//         <div>
-            
-//         </div>
-//     );
-// };
-
-// export default Footer; 
-// export default function Footer() {
-//   return (
-//     <footer className="bg-gray-800 text-gray-300 py-6 mt-auto">
-//       <div className="container mx-auto px-4 text-center">
-//         <p className="mb-2">
-//           &copy; {new Date().getFullYear()} <span className="text-white font-semibold">FreelanceHub</span>. All rights reserved.
-//         </p>
-//         <p className="text-sm opacity-75">
-//           Connecting talent with opportunity — one job at a time.
-//         </p>
-//       </div>
-//     </footer>
-//   );
-// }
-
 import { Link } from "react-router";
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-r from-gray-600 to-gray-800 text-gray-300 pt-12 pb-8">
+    // Uses bg-neutral and text-neutral-content for automatic high contrast in both modes
+    <footer className="bg-neutral text-neutral-content pt-16 pb-8 border-t border-base-300">
       <div className="container mx-auto px-4">
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           
           {/* Column 1: Brand & Tagline */}
-          <div>
-            <h3 className="text-white text-xl font-bold mb-3 flex items-center">
-              <span className="bg-blue-600 w-2 h-6 mr-2 rounded"></span>
-              Freelance<span className="text-blue-300">Hub</span>
+          <div className="space-y-4">
+            <h3 className="text-white text-2xl font-bold flex items-center">
+              <span className="bg-primary w-2 h-8 mr-3 rounded-full"></span>
+              Freelance<span className="text-primary">Hub</span>
             </h3>
-            <p className="text-sm opacity-80 leading-relaxed">
-              Connecting talent with opportunity — one job at a time.
+            <p className="text-sm opacity-70 leading-relaxed text-white">
+              The world's most trusted marketplace for elite freelancers and ambitious businesses. 
+              Connecting talent with opportunity—one project at a time.
             </p>
           </div>
 
           {/* Column 2: Quick Links */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Explore</h4>
-            <ul className="space-y-2">
-              <li><Link to="/" className="hover:text-white transition">Home</Link></li>
-              <li><Link to="/allJobs" className="hover:text-white transition">All Jobs</Link></li>
-              <li><Link to="/addJobs" className="hover:text-white transition">Post a Job</Link></li>
-              <li><Link to="/my-accepted-tasks" className="hover:text-white transition">My Tasks</Link></li>
+            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-xs opacity-90">Explore</h4>
+            <ul className="space-y-3 text-sm">
+              <li><Link to="/" className="hover:text-primary transition-colors opacity-80 hover:opacity-100">Home</Link></li>
+              <li><Link to="/allJobs" className="hover:text-primary transition-colors opacity-80 hover:opacity-100">Browse All Jobs</Link></li>
+              <li><Link to="/addJobs" className="hover:text-primary transition-colors opacity-80 hover:opacity-100">Post a Project</Link></li>
+              <li><Link to="/my-accepted-tasks" className="hover:text-primary transition-colors opacity-80 hover:opacity-100">Active Tasks</Link></li>
             </ul>
           </div>
 
-          {/* Column 3: Resources */}
+          {/* Column 3: Contact Info */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Resources</h4>
-            <ul className="space-y-2">
-              <li><a href="#!" className="hover:text-white transition">Help Center</a></li>
-              <li><a href="#!" className="hover:text-white transition">Community</a></li>
-              <li><a href="#!" className="hover:text-white transition">Blog</a></li>
-              <li><a href="#!" className="hover:text-white transition">API Docs</a></li>
+            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-xs opacity-90">Contact Us</h4>
+            <ul className="space-y-3 text-sm opacity-80">
+              <li className="flex items-center gap-3 group cursor-default">
+  {/* Icon container with better contrast and hover effect */}
+  <span className="bg-blue-600/20 text-blue-400 p-2 rounded-lg border border-blue-500/20 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 shadow-sm">
+    📍
+  </span> 
+  
+  {/* Text with explicit high-contrast color */}
+  <span className="text-gray-200 group-hover:text-white transition-colors font-medium">
+    123 Dev Lane, Tech City
+  </span>
+</li>
+              <li className="flex items-center gap-3">
+                <span className="bg-white/10 p-1.5 rounded-md">📧</span> 
+                <a href="mailto:support@freelancehub.com" className="hover:text-primary transition-colors">support@freelancehub.com</a>
+              </li>
+              <li className="flex items-center gap-3">
+                <span className="bg-white/10 p-1.5 rounded-md">📞</span> 
+                <a href="tel:+1234567890" className="hover:text-primary transition-colors">+1 (234) 567-890</a>
+              </li>
             </ul>
           </div>
 
-          {/* Column 4: Legal */}
+          {/* Column 4: Legal & Newsletter */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Legal</h4>
-            <ul className="space-y-2">
-              <li><Link to="/terms" className="hover:text-white transition">Terms of Service</Link></li>
-              <li><Link to="/privacy" className="hover:text-white transition">Privacy Policy</Link></li>
-              <li><a href="#!" className="hover:text-white transition">Cookie Policy</a></li>
+            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-xs opacity-90">Legal</h4>
+            <ul className="space-y-3 text-sm">
+              <li><Link to="/terms" className="hover:text-primary transition-colors opacity-80 hover:opacity-100">Terms of Service</Link></li>
+              <li><Link to="/privacy" className="hover:text-primary transition-colors opacity-80 hover:opacity-100">Privacy Policy</Link></li>
+              <li><Link to="/support" className="hover:text-primary transition-colors opacity-80 hover:opacity-100">Help & Support</Link></li>
             </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm opacity-75 text-center md:text-left">
-            &copy; {new Date().getFullYear()} <span className="text-white font-medium">FreelanceHub</span>. All rights reserved.
-          </p>
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+<p className="text-sm font-medium text-gray-300">
+  &copy; {new Date().getFullYear()} 
+  <span className="text-blue-500 mx-1">FreelanceHub</span>. 
+  <span className="text-white border-l border-gray-600 ml-2 pl-2">
+    Built by Khandaker Mansura
+  </span>
+</p>
           
           {/* Social Icons */}
-          <div className="flex space-x-4 mt-4 md:mt-0">
-  {/* X (Twitter) */}
+          <div className="flex space-x-5">
+            <a href="https://x.com/freelancehub" target="_blank" rel="noreferrer" className="bg-white/5 p-2 rounded-full hover:bg-primary hover:text-white transition-all duration-300">
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            {/* Facebook */}
  <a 
-  href="https://x.com/freelancehub" 
+  href="https://www.facebook.com/login.php/" 
   target="_blank" 
   rel="noopener noreferrer"
-  className="text-gray-400 hover:text-white hover:scale-110 transition-transform"
-  aria-label="Follow us on X"
+  className="bg-white/10 p-2 rounded-full hover:bg-[#1877F2] hover:text-white transition-all duration-300"
+  aria-label="Login with Facebook"
 >
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    width="20" 
-    height="20" 
-    viewBox="0 0 24 24"
-    fill="currentColor"
-  >
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-  </svg>
-</a>
-
-  {/* Facebook */}
-  <a 
-    href="https://facebook.com/freelancehub" 
-    target="_blank" 
-    rel="noopener noreferrer"
-    className="text-gray-400 hover:text-white transition"
-    aria-label="Follow us on Facebook"
-  >
-    <svg 
-      xmlns="http://www.w3.org/2000/svg" 
-      width="20" 
-      height="20" 
-      viewBox="0 0 24 24"
-      fill="currentColor"
-    >
-      <path d="M22.676 0H1.324C.593 0 0 .593 0 1.324v21.352C0 23.408.593 24 1.324 24h11.494v-9.294H9.689v-3.621h3.129V8.41c0-3.099 1.894-4.785 4.659-4.785 1.325 0 2.464.097 2.796.141v3.24h-1.92c-1.504 0-1.796.721-1.796 1.771v2.311h3.584l-.465 3.63H16.56v9.294h6.115c.733 0 1.325-.592 1.325-1.324V1.324C24 .593 23.408 0 22.676 0z"/>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
     </svg>
   </a>
 
-  {/* Instagram */}
+  {/* GitHub  */}
   <a 
-    href="https://instagram.com/freelancehub" 
+    href="https://github.com/KhMansura" 
     target="_blank" 
     rel="noopener noreferrer"
-    className="text-gray-400 hover:text-white transition"
-    aria-label="Follow us on Instagram"
+    className="bg-white/10 p-2 rounded-full hover:bg-primary hover:text-white transition-all duration-300 shadow-sm"
+    aria-label="Check my GitHub"
   >
-    <svg 
-      xmlns="http://www.w3.org/2000/svg" 
-      width="20" 
-      height="20" 
-      viewBox="0 0 24 24"
-      fill="currentColor"
-    >
-      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.28-.073 1.688-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.28.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.28-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57v-2.205c-3.33.72-4.035-1.41-4.035-1.41-.54-1.38-1.32-1.74-1.32-1.74-1.08-.735.075-.72.075-.72 1.2.09 1.83 1.23 1.83 1.23 1.065 1.815 2.79 1.29 3.465.99.105-.78.42-1.29.765-1.59-2.67-.3-5.475-1.335-5.475-5.94 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.92 1.23 3.225 0 4.62-2.805 5.625-5.475 5.925.435.375.81 1.125.81 2.265v3.36c0 .315.225.69.825.57C20.565 21.795 24 17.31 24 12c0-6.63-5.37-12-12-12z"/>
     </svg>
   </a>
+  {/* LinkedIn  */}
+  <a 
+    href="https://linkedin.com/in/yourusername" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="bg-white/10 p-2 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 shadow-sm border border-white/5"
+    aria-label="Connect on LinkedIn"
+  >
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+    </svg>
+  </a>
+          </div>
+        </div>
+
+        {/* Dynamic Theme */}
+    
+        <div className="mt-8 flex justify-center gap-8 border-t border-white/5 pt-6">
+  {/* Secure Signal */}
+  <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-gray-300 font-semibold transition-opacity hover:opacity-100">
+    <span className="relative flex h-2 w-2">
+      {/* Animated */}
+      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
+      <span className="relative inline-flex rounded-full h-2 w-2 bg-success shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
+    </span>
+    Secure Payment
+  </div>
+
+  {/* Verified Signal */}
+  <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-gray-300 font-semibold transition-opacity hover:opacity-100">
+    <span className="relative flex h-2 w-2">
+      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-info opacity-75"></span>
+      <span className="relative inline-flex rounded-full h-2 w-2 bg-info shadow-[0_0_8px_rgba(6,182,212,0.6)]"></span>
+    </span>
+    Verified Profiles
+  </div>
 </div>
-        </div>
-
-        {/* Trust Signal */}
-        <div className="mt-6 text-center text-xs text-gray-500">
-          Secure • Verified Profiles • Escrow Payments
-        </div>
       </div>
     </footer>
   );

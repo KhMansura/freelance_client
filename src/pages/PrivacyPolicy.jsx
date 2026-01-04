@@ -1,88 +1,127 @@
 // src/pages/PrivacyPolicy.jsx
 import { Link } from "react-router";
+import { motion } from "framer-motion";
 
 export default function PrivacyPolicy() {
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
-      <div className="max-w-4xl mx-auto bg-white shadow-sm rounded-lg p-6 md:p-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6">Privacy Policy</h1>
-        <p className="text-sm text-gray-500 mb-6">
-          Last updated: {new Date().toLocaleDateString()}
-        </p>
+    <div className="min-h-screen bg-base-200 py-12 px-4 transition-colors duration-300">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="max-w-4xl mx-auto bg-base-100 shadow-xl rounded-2xl overflow-hidden border border-base-300"
+      >
+        {/* Header Ribbon */}
+        <div className="h-2 bg-gradient-to-r from-primary via-blue-500 to-secondary"></div>
+        
+        <div className="p-8 md:p-12">
+          <header className="border-b border-base-300 pb-8 mb-8">
+            <h1 className="text-4xl font-extrabold text-base-content mb-4 tracking-tight">
+              Privacy Policy
+            </h1>
+            <div className="flex flex-wrap items-center gap-4 text-sm opacity-60">
+              <p>Last updated: {new Date().toLocaleDateString()}</p>
+              <span className="hidden md:inline">•</span>
+              <p>Version 1.0.2</p>
+              <span className="hidden md:inline">•</span>
+              <span className="badge badge-outline badge-success font-medium">Official</span>
+            </div>
+          </header>
 
-        <div className="prose prose-gray max-w-none space-y-6">
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-800 mt-8 mb-4">1. Information We Collect</h2>
-            <ul className="list-disc pl-6 space-y-2">
-              <li><strong>Account Information:</strong> Name, email, photo URL (if provided).</li>
-              <li><strong>Job Data:</strong> Titles, descriptions, categories, cover image URLs.</li>
-              <li><strong>Authentication Logs:</strong> Sign-in method, timestamps (via Firebase).</li>
-            </ul>
-          </section>
+          <div className="space-y-10 text-base-content/80 leading-relaxed">
+            
+            {/* Section 1 */}
+            <section>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary font-bold">1</span>
+                <h2 className="text-2xl font-bold text-base-content">Information We Collect</h2>
+              </div>
+              <div className="grid md:grid-cols-3 gap-4 pl-11">
+                <div className="p-4 bg-base-200 rounded-xl">
+                  <p className="font-bold text-primary mb-1 text-sm">Account</p>
+                  <p className="text-xs">Name, email, and photo URL via Google/Email.</p>
+                </div>
+                <div className="p-4 bg-base-200 rounded-xl">
+                  <p className="font-bold text-primary mb-1 text-sm">Content</p>
+                  <p className="text-xs">Job titles, descriptions, and bid history.</p>
+                </div>
+                <div className="p-4 bg-base-200 rounded-xl">
+                  <p className="font-bold text-primary mb-1 text-sm">Security</p>
+                  <p className="text-xs">Authentication logs and sign-in timestamps.</p>
+                </div>
+              </div>
+            </section>
 
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-800 mt-8 mb-4">2. How We Use Your Data</h2>
-            <ul className="list-disc pl-6 space-y-2">
-              <li>To authenticate and personalize your experience.</li>
-              <li>To display your jobs and allow others to view them.</li>
-              <li>To improve the Platform (e.g., usage analytics via anonymized logs).</li>
-            </ul>
-          </section>
+            {/* Section 2 */}
+            <section>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary font-bold">2</span>
+                <h2 className="text-2xl font-bold text-base-content">Data Usage</h2>
+              </div>
+              <p className="pl-11 mb-4">We use your information to facilitate the core functions of <span className="text-primary font-semibold">FreelanceHub</span>:</p>
+              <ul className="list-none pl-11 space-y-3">
+                <li className="flex items-start gap-2">
+                  <span className="text-success mt-1">✔</span> 
+                  <span>Authenticating secure access to your private dashboard.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-success mt-1">✔</span> 
+                  <span>Publicly displaying job posts to potential freelancers/clients.</span>
+                </li>
+              </ul>
+            </section>
 
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-800 mt-8 mb-4">3. Data Sharing</h2>
-            <p>
-              We do **not** sell or rent your personal data. Information is shared only when necessary:
-            </p>
-            <ul className="list-disc pl-6 space-y-2">
-              <li><strong>With other users:</strong> Your name, photo, and job posts are visible to facilitate collaboration.</li>
-              <li><strong>With Firebase & MongoDB:</strong> As backend service providers (data stored securely in compliance with their policies).</li>
-            </ul>
-          </section>
+            {/* Section 3 */}
+            <section className="p-6 bg-info/5 border border-info/20 rounded-2xl">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-info/10 text-info font-bold">3</span>
+                <h2 className="text-2xl font-bold text-base-content">Data Sharing & Privacy</h2>
+              </div>
+              <p className="text-sm">
+                We respect your privacy. We <strong>do not sell</strong> your personal data to third parties. Data is only stored using secure industry providers like <strong>Firebase (Google Cloud)</strong> and <strong>MongoDB Atlas</strong>.
+              </p>
+            </section>
 
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-800 mt-8 mb-4">4. Data Security</h2>
-            <p>
-              We use industry-standard measures including:
-            </p>
-            <ul className="list-disc pl-6 space-y-2">
-              <li>Firebase Authentication (Google-grade security)</li>
-              <li>HTTPS encryption in transit</li>
-              <li>Environment variable protection for API keys</li>
-            </ul>
-          </section>
+            {/* Section 4 */}
+            <section>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary font-bold">4</span>
+                <h2 className="text-2xl font-bold text-base-content">Security Measures</h2>
+              </div>
+              <p className="pl-11">
+                Your data is protected by Google-grade security via Firebase Authentication and end-to-end 
+                <strong> SSL/TLS encryption</strong> during transit.
+              </p>
+            </section>
 
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-800 mt-8 mb-4">5. Your Rights</h2>
-            <p>
-              You may:
-            </p>
-            <ul className="list-disc pl-6 space-y-2">
-              <li>Edit or delete your job posts.</li>
-              <li>Delete your account (via UI or request).</li>
-              <li>Export your data upon request.</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-800 mt-8 mb-4">6. Children’s Privacy</h2>
-            <p>
-              FreelanceHub is not intended for users under 18. We do not knowingly collect data from minors.
-            </p>
-          </section>
-
-          <div className="pt-6 border-t border-gray-200 mt-8">
-            <p className="text-gray-600">
-              For privacy concerns, contact: <a href="mailto:privacy@freelancehub.example.com" className="text-blue-600 hover:underline">privacy@freelancehub.example.com</a>
-            </p>
-            <Link 
-              to="/" 
-              className="mt-4 inline-flex items-center text-blue-600 hover:text-blue-800 font-medium"
-            >
-              ← Back to Home
-            </Link>
+            {/* Footer Links */}
+            <div className="pt-10 border-t border-base-300 flex flex-col md:flex-row justify-between items-center gap-6">
+              <div className="flex items-center gap-2">
+                <div className="avatar placeholder">
+                  <div className="bg-neutral text-neutral-content rounded-full w-8">
+                    <span>KM</span>
+                  </div>
+                </div>
+                <p className="text-sm italic">
+                  Questions? <a href="mailto:privacy@freelancehub.com" className="text-primary hover:underline font-medium">Email Privacy Team</a>
+                </p>
+              </div>
+              
+              <Link 
+                to="/" 
+                className="btn btn-outline btn-primary btn-sm rounded-full px-6"
+              >
+                ← Back to Home
+              </Link>
+            </div>
           </div>
         </div>
+      </motion.div>
+
+      {/* Trust Signal Placeholder */}
+      <div className="mt-8 text-center opacity-40 grayscale flex justify-center gap-6 text-xs font-bold uppercase tracking-widest">
+         <span>GDPR Compliant</span>
+         <span>SSL Encrypted</span>
+         <span>Firebase Secured</span>
       </div>
     </div>
   );

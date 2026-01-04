@@ -1,107 +1,395 @@
-// import React, { use } from "react";
-// import { Link, NavLink } from "react-router";
-// import { AuthContext } from "../../context/AuthContext";
+// import { Link, NavLink, useNavigate } from "react-router";
+// import useAuth from "../../hooks/useAuth";
+// import logo from "../../assets/logo.png";
+// import { useEffect, useState } from "react";
+// import ThemeToggle from "../ThemeToggle";
 
-// const Navbar = () => {
-//   const { user, signOutUser } = use(AuthContext);
+// export default function Navbar() {
+//   const [theme, setTheme] = useState(localStorage.getItem("theme") || "winter");
+//   const { user, loading, signOutUser } = useAuth();
+//   const navigate = useNavigate();
+//   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-//   const handleSignOut = () => {
-//     signOutUser().then().catch();
+// useEffect(() => {
+//   document.documentElement.setAttribute("data-theme", theme);
+// }, [theme]); 
+
+// const handleTheme = (e) => {
+//   const newTheme = e.target.checked ? "night" : "winter";
+//   setTheme(newTheme);
+//   localStorage.setItem("theme", newTheme);
+// };
+
+
+//  const handleSignOut = async () => {
+//     try {
+//       await signOutUser();
+//       navigate("/login");
+//     } catch (err) {
+//       console.error("Sign out error:", err);
+//     }
 //   };
 
-//   const links = (
-//     <>
-//       <li>
-//         <NavLink to="/">Home</NavLink>
-//       </li>
-//       <li>
-//         <NavLink to="/allJobs">All Jobs</NavLink>
-//       </li>
-//       <li>
-//         <NavLink to="/register">Register</NavLink>
-//       </li>
-//       {user && (
-//         <>
-//           <li>
-//             <NavLink to="/register">My Jobs</NavLink>
-//           </li>
-//           <li>
-//             <NavLink to="/register">My </NavLink>
-//           </li>
-//         </>
-//       )}
-//     </>
-//   );
+//   if (loading) {
+//     return (
+//   //     <nav className="navbar bg-white shadow-sm px-4 py-3">
+//   //       <div className="flex items-center space-x-4">
+//   //         <div className="h-8 w-24 bg-gray-200 rounded animate-pulse"></div>
+//   //         <div className="h-6 w-16 bg-gray-200 rounded animate-pulse"></div>
+//   //       </div>
+//   //     </nav>
+//   //   );
+//   // }
+//   <nav className="sticky top-0 z-50 w-full bg-base-100/80 backdrop-blur-md border-b px-4 py-3">
+//         <div className="container mx-auto flex justify-between items-center">
+//           <div className="h-8 w-32 bg-gray-200 rounded animate-pulse"></div>
+//           <div className="hidden md:flex space-x-6">
+//             {[1, 2, 3, 4].map((i) => (
+//               <div key={i} className="h-6 w-16 bg-gray-200 rounded animate-pulse"></div>
+//             ))}
+//           </div>
+//         </div>
+//       </nav>
+//     );
+//   }
+
+//   // Active Link Style Helper
+//   const navLinkStyles = ({ isActive }) =>
+//     `px-3 py-2 rounded-md transition-all duration-300 font-medium ${
+//       isActive
+//         ? "text-white bg-blue-700/50 shadow-sm"
+//         : "text-blue-50 hover:text-white hover:bg-white/10"
+//     }`;
+
 //   return (
-//     <div className="navbar bg-base-100 shadow-sm">
-//       <div className="navbar-start">
-//         <div className="dropdown">
-//           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-//             <svg
-//               xmlns="http://www.w3.org/2000/svg"
-//               className="h-5 w-5"
-//               fill="none"
-//               viewBox="0 0 24 24"
-//               stroke="currentColor"
-//             >
-//               {" "}
+//     <nav className="navbar bg-gradient-to-r from-cyan-800 via-blue-400 to-cyan-600 shadow-md px-4 py-3 backdrop-blur-md">
+//       <div className="container mx-auto flex justify-between items-center">
+//         {/* Logo */}
+
+//         <Link to="/" className="flex items-center space-x-2">
+//           <img
+//             src={logo}
+//             alt="FreelanceHub Logo"
+//             className="h-8 w-auto rounded-xl"
+//           />
+//           <span className="text-xl font-bold text-blue-800">
+//             Freelance<span className="text-gray-700">Hub</span>
+//           </span>
+//         </Link>
+
+//         {/* Desktop Nav */}
+//         <div className="hidden md:flex items-center space-x-6">
+//           <NavLink
+//             to="/"
+//             className={({ isActive }) =>
+//               `px-3 py-2 rounded-md transition-colors font-medium ${
+//                 isActive
+//                   ? "text-blue-700 font-medium"
+//                   : "text-gray-600 hover:text-gray-900"
+//               }`
+//             }
+//           >
+//             Home
+//           </NavLink>
+//           <NavLink
+//             to="/allJobs"
+//             className={({ isActive }) =>
+//               `px-3 py-2 rounded-md transition-colors ${
+//                 isActive
+//                   ? "text-blue-600 font-medium"
+//                   : "text-gray-600 hover:text-gray-900"
+//               }`
+//             }
+//           >
+//             All Jobs
+//           </NavLink>
+
+//           {user ? (
+//             <>
+//               <NavLink
+//                 to="/addJobs"
+//                 className={({ isActive }) =>
+//                   `px-3 py-2 rounded-md transition-colors ${
+//                     isActive
+//                       ? "text-blue-600 font-medium"
+//                       : "text-gray-600 hover:text-gray-900"
+//                   }`
+//                 }
+//               >
+//                 Add a Job
+//               </NavLink>
+//                   <NavLink
+//       to="/myPostedJobs"
+//       className={({ isActive }) =>
+//         `px-3 py-2 rounded-md transition-colors ${
+//           isActive
+//             ? "text-blue-600 font-medium"
+//             : "text-gray-600 hover:text-gray-900"
+//         }`
+//       }
+//     >
+//       My Posted Jobs
+//     </NavLink>
+//               <NavLink
+//                 to="/my-accepted-tasks"
+//                 className={({ isActive }) =>
+//                   `px-3 py-2 rounded-md transition-colors ${
+//                     isActive
+//                       ? "text-blue-600 font-medium"
+//                       : "text-gray-600 hover:text-gray-900"
+//                   }`
+//                 }
+//               >
+//                 My Accepted Tasks
+//               </NavLink>
+              
+//                 <input
+//       type="checkbox"
+//       className="toggle toggle-primary"
+//       checked={theme === "night"}
+//       onChange={handleTheme}
+//     />
+//               {/* Avatar Dropdown */}
+//               <div className="relative group">
+//                 <button
+//                   className="flex items-center space-x-2 focus:outline-none"
+//                   aria-label="User menu"
+//                 >
+//                   {/* ✅ Avatar with fallback */}
+//                   <div className="relative">
+//                     {user.photoURL ? (
+//                       <img
+//                         src={user.photoURL}
+//                         alt={user.displayName || "User"}
+//                         className="w-8 h-8 rounded-full border border-white/30 object-cover"
+//                         onError={(e) => {
+//                           // Fallback if photoURL broken
+//                           e.target.style.display = "none";
+//                           e.target.nextSibling.style.display = "flex";
+//                         }}
+//                       />
+//                     ) : null}
+
+//                     {/* Fallback: Initials circle (always rendered, hidden by default) */}
+//                     <div
+//                       className="absolute inset-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-medium"
+//                       style={{ display: user.photoURL ? "none" : "flex" }}
+//                     >
+//                       {(user.displayName || user.email)
+//                         .split(/\s+/)
+//                         .map((n) => n[0])
+//                         .join("")
+//                         .toUpperCase()
+//                         .slice(0, 2)}
+//                     </div>
+//                   </div>
+
+//                   <span className="hidden md:inline text-gray-700 font-medium">
+//                     {user.displayName || user.email.split("@")[0]}
+//                   </span>
+//                 </button>
+
+//                 {/* Dropdown */}
+//                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden group-hover:block z-10 border">
+//                   <div className="px-4 py-2 text-sm text-gray-700 border-b">
+//                     {user.displayName}
+//                     <br />
+//                     <span className="text-xs text-gray-500">{user.email}</span>
+//                   </div>
+//                   <button
+//                     onClick={handleSignOut}
+//                     className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+//                   >
+//                     Log Out
+//                   </button>
+//                 </div>
+//               </div>
+//             </>
+//           ) : (
+//             <>
+//               <Link
+//                 to="/login"
+//                 className="px-3 py-2 text-gray-600 hover:text-gray-900 font-medium"
+//               >
+//                 Login
+//               </Link>
+//               <Link
+//                 to="/register"
+//                 className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-medium"
+//               >
+//                 Register
+//               </Link>
+//             </>
+//           )}
+//         </div>
+
+//         {/* Mobile Menu Button */}
+//         <button
+//           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+//           className="md:hidden text-white focus:outline-none"
+//           aria-label="Toggle menu"
+//         >
+//           <svg
+//             xmlns="http://www.w3.org/2000/svg"
+//             className="h-6 w-6"
+//             fill="none"
+//             viewBox="0 0 24 24"
+//             stroke="currentColor"
+//           >
+//             {isMobileMenuOpen ? (
+//               // Close (X) icon
 //               <path
 //                 strokeLinecap="round"
 //                 strokeLinejoin="round"
-//                 strokeWidth="2"
-//                 d="M4 6h16M4 12h8m-8 6h16"
-//               />{" "}
-//             </svg>
+//                 strokeWidth={2}
+//                 d="M6 18L18 6M6 6l12 12"
+//               />
+//             ) : (
+//               // Hamburger icon
+//               <path
+//                 strokeLinecap="round"
+//                 strokeLinejoin="round"
+//                 strokeWidth={2}
+//                 d="M4 6h16M4 12h16M4 18h16"
+//               />
+//             )}
+//           </svg>
+//         </button>
+//         {/* Mobile Menu */}
+//         {isMobileMenuOpen && (
+//           <div className="md:hidden absolute top-full left-0 w-full bg-blue-300 shadow-lg z-20">
+//             <div className="container mx-auto px-4 py-4 flex flex-col space-y-3">
+//               <NavLink
+//                 to="/"
+//                 className={({ isActive }) =>
+//                   `px-4 py-2 rounded-md font-medium ${
+//                     isActive
+//                       ? "bg-blue-900/50 text-white"
+//                       : "text-blue-100 hover:bg-blue-900/30"
+//                   }`
+//                 }
+//                 onClick={() => setIsMobileMenuOpen(false)}
+//               >
+//                 Home
+//               </NavLink>
+//               <NavLink
+//                 to="/allJobs"
+//                 className={({ isActive }) =>
+//                   `px-4 py-2 rounded-md font-medium ${
+//                     isActive
+//                       ? "bg-blue-900/50 text-white"
+//                       : "text-blue-100 hover:bg-blue-900/30"
+//                   }`
+//                 }
+//                 onClick={() => setIsMobileMenuOpen(false)}
+//               >
+//                 All Jobs
+//               </NavLink>
+
+//               {user ? (
+//                 <>
+//                   <NavLink
+//                     to="/addJobs"
+//                     className={({ isActive }) =>
+//                       `px-4 py-2 rounded-md font-medium ${
+//                         isActive
+//                           ? "bg-blue-900/50 text-white"
+//                           : "text-blue-100 hover:bg-blue-900/30"
+//                       }`
+//                     }
+//                     onClick={() => setIsMobileMenuOpen(false)}
+//                   >
+//                     Add a Job
+//                   </NavLink>
+//                       <NavLink
+//       to="/myPostedJobs"
+//       className={({ isActive }) =>
+//         `px-4 py-2 rounded-md font-medium ${
+//           isActive
+//             ? "bg-blue-900/50 text-white"
+//             : "text-blue-100 hover:bg-blue-900/30"
+//         }`
+//       }
+//       onClick={() => setIsMobileMenuOpen(false)}
+//     >
+//       My Posted Jobs
+//     </NavLink>
+//                   <NavLink
+//                     to="/my-accepted-tasks"
+//                     className={({ isActive }) =>
+//                       `px-4 py-2 rounded-md font-medium ${
+//                         isActive
+//                           ? "bg-blue-900/50 text-white"
+//                           : "text-blue-100 hover:bg-blue-900/30"
+//                       }`
+//                     }
+//                     onClick={() => setIsMobileMenuOpen(false)}
+//                   >
+//                     My Accepted Tasks
+//                   </NavLink>
+
+//                   {/* User Info & Logout */}
+//                   <div className="pt-2 border-t border-blue-700/50">
+//                     <div className="px-4 py-2 text-sm text-blue-100">
+//                       <div>{user.displayName || user.email.split("@")[0]}</div>
+//                       <div className="text-xs opacity-75">{user.email}</div>
+//                     </div>
+//                     <button
+//                       onClick={() => {
+//                         handleSignOut();
+//                         setIsMobileMenuOpen(false);
+//                       }}
+//                       className="w-full text-left px-4 py-2 text-sm text-red-300 hover:bg-red-900/20 rounded-md"
+//                     >
+//                       Log Out
+//                     </button>
+//                   </div>
+//                 </>
+//               ) : (
+//                 <>
+//                   <Link
+//                     to="/login"
+//                     className="px-4 py-2 text-blue-100 hover:bg-blue-900/30 rounded-md font-medium"
+//                     onClick={() => setIsMobileMenuOpen(false)}
+//                   >
+//                     Login
+//                   </Link>
+//                   <Link
+//                     to="/register"
+//                     className="px-4 py-2 bg-white text-blue-700 rounded-md font-medium hover:bg-blue-50"
+//                     onClick={() => setIsMobileMenuOpen(false)}
+//                   >
+//                     Register
+//                   </Link>
+//                 </>
+//               )}
+//             </div>
 //           </div>
-//           <ul
-//             tabIndex="-1"
-//             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-//           >
-//             {links}
-//           </ul>
-//         </div>
-//         <a className="btn btn-ghost text-xl">daisyUI</a>
-//       </div>
-//       <div className="navbar-center hidden lg:flex">
-//         <ul className="menu menu-horizontal px-1">{links}</ul>
-//       </div>
-//       <div className="navbar-end">
-//         {user ? (
-//           <a onClick={handleSignOut} className="btn btn-primary">
-//             Sign Out
-//           </a>
-//         ) : (
-//           <Link to="/login">Login</Link>
 //         )}
 //       </div>
-//     </div>
+//     </nav>
 //   );
-// };
-
-// export default Navbar;
+// }
 import { Link, NavLink, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
-// import { useAuth } from "../hooks/useAuth"; // ← You already have this hook
 import logo from "../../assets/logo.png";
 import { useEffect, useState } from "react";
-import ThemeToggle from "../ThemeToggle";
+
 export default function Navbar() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "winter");
-
-useEffect(() => {
-  document.documentElement.setAttribute("data-theme", theme);
-}, [theme]); 
-
-const handleTheme = (e) => {
-  const newTheme = e.target.checked ? "night" : "winter";
-  setTheme(newTheme);
-  localStorage.setItem("theme", newTheme);
-};
-
-
   const { user, loading, signOutUser } = useAuth();
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  const handleTheme = (e) => {
+    const newTheme = e.target.checked ? "night" : "winter";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
 
   const handleSignOut = async () => {
     try {
@@ -112,364 +400,127 @@ const handleTheme = (e) => {
     }
   };
 
+  // Professional Skeleton Loader for Navbar
   if (loading) {
     return (
-      <nav className="navbar bg-white shadow-sm px-4 py-3">
-        <div className="flex items-center space-x-4">
-          <div className="h-8 w-24 bg-gray-200 rounded animate-pulse"></div>
-          <div className="h-6 w-16 bg-gray-200 rounded animate-pulse"></div>
+      <nav className="sticky top-0 z-50 w-full bg-base-100/80 backdrop-blur-md border-b px-4 py-3">
+        <div className="container mx-auto flex justify-between items-center">
+          <div className="h-8 w-32 bg-gray-200 rounded animate-pulse"></div>
+          <div className="hidden md:flex space-x-6">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="h-6 w-16 bg-gray-200 rounded animate-pulse"></div>
+            ))}
+          </div>
         </div>
       </nav>
     );
   }
 
-  return (
-    <nav className="navbar bg-gradient-to-r from-cyan-800 via-blue-400 to-cyan-600 shadow-md px-4 py-3">
-      <div className="container mx-auto flex justify-between items-center">
-        {/* Logo */}
+  // Improved NavLink Styles for Visibility and Hover
+  const navLinkStyles = ({ isActive }) =>
+    `px-3 py-2 rounded-md transition-all duration-300 font-semibold tracking-wide ${
+      isActive
+        ? "text-white bg-blue-900/50 shadow-inner"
+        : "text-blue-50 hover:text-white hover:bg-white/20"
+    }`;
 
-        <Link to="/" className="flex items-center space-x-2">
-          <img
-            src={logo}
-            alt="FreelanceHub Logo"
-            className="h-8 w-auto rounded-xl"
-          />
-          <span className="text-xl font-bold text-blue-800">
-            Freelance<span className="text-gray-700">Hub</span>
+  return (
+    <nav className="sticky top-0 z-50 w-full bg-gradient-to-r from-cyan-900 via-blue-700 to-cyan-800 shadow-xl px-4 py-2 backdrop-blur-md border-b border-white/10">
+      <div className="container mx-auto flex justify-between items-center">
+        
+        {/* Logo Section */}
+        <Link to="/" className="flex items-center space-x-2 group">
+          <div className="bg-white p-1 rounded-lg transition-transform group-hover:scale-105 shadow-md">
+            <img src={logo} alt="FreelanceHub" className="h-8 w-auto object-contain" />
+          </div>
+          <span className="text-xl font-bold text-white tracking-tighter uppercase">
+            Freelance<span className="text-cyan-300">Hub</span>
           </span>
         </Link>
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center space-x-6">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              `px-3 py-2 rounded-md transition-colors font-medium ${
-                isActive
-                  ? "text-blue-700 font-medium"
-                  : "text-gray-600 hover:text-gray-900"
-              }`
-            }
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/allJobs"
-            className={({ isActive }) =>
-              `px-3 py-2 rounded-md transition-colors ${
-                isActive
-                  ? "text-blue-600 font-medium"
-                  : "text-gray-600 hover:text-gray-900"
-              }`
-            }
-          >
-            All Jobs
-          </NavLink>
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center space-x-1">
+          <NavLink to="/" className={navLinkStyles}>Home</NavLink>
+          <NavLink to="/allJobs" className={navLinkStyles}>All Jobs</NavLink>
+          <NavLink to="/aboutUs" className={navLinkStyles}>About Us</NavLink>
+          <NavLink to="/contact" className={navLinkStyles}>Contact</NavLink>
+          <NavLink to="/blog" className={navLinkStyles}>Blog</NavLink>
 
           {user ? (
             <>
-              <NavLink
-                to="/addJobs"
-                className={({ isActive }) =>
-                  `px-3 py-2 rounded-md transition-colors ${
-                    isActive
-                      ? "text-blue-600 font-medium"
-                      : "text-gray-600 hover:text-gray-900"
-                  }`
-                }
-              >
-                Add a Job
-              </NavLink>
-                  <NavLink
-      to="/myPostedJobs"
-      className={({ isActive }) =>
-        `px-3 py-2 rounded-md transition-colors ${
-          isActive
-            ? "text-blue-600 font-medium"
-            : "text-gray-600 hover:text-gray-900"
-        }`
-      }
-    >
-      My Posted Jobs
-    </NavLink>
-              <NavLink
-                to="/my-accepted-tasks"
-                className={({ isActive }) =>
-                  `px-3 py-2 rounded-md transition-colors ${
-                    isActive
-                      ? "text-blue-600 font-medium"
-                      : "text-gray-600 hover:text-gray-900"
-                  }`
-                }
-              >
-                My Accepted Tasks
-              </NavLink>
-              
+              {/* Logged In Routes (Meeting 5+ count) */}
+              <NavLink to="dashboard/add-job" className={navLinkStyles}>Add Job</NavLink>
+              <NavLink to="dashboard/my-jobs" className={navLinkStyles}>My Posts</NavLink>
+              <NavLink to="dashboard/my-accepted-tasks" className={navLinkStyles}>My Tasks</NavLink>
 
-              {/* Avatar Dropdown */}
-              {/* <div className="relative group">
-                <button className="flex items-center space-x-2 focus:outline-none">
-                  <img
-                    src={
-                      user.photoURL ||
-                      `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                        user.displayName || user.email.split("@")[0]
-                      )}&background=0D8ABC&color=fff`
-                    }
-                    alt="Profile"
-                    className="w-8 h-8 rounded-full border"
-                  />
-                  <span className="hidden md:inline text-gray-700 font-medium">
-                    {user.displayName || user.email.split("@")[0]}
-                  </span>
-                </button>
+              <div className="h-6 w-[1px] bg-white/20 mx-2"></div>
 
-                {/* Dropdown */}
-              {/* <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden group-hover:block z-10 border">
-                  <div className="px-4 py-2 text-sm text-gray-700 border-b">
-                    {user.displayName}
-                    <br />
-                    <span className="text-xs text-gray-600">{user.email}</span>
+              {/* Advanced Menu (Dropdown) */}
+              <div className="dropdown dropdown-end group">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar border-2 border-cyan-400/50 hover:border-white transition-all shadow-lg">
+                  <div className="w-10 rounded-full">
+                    <img src={user?.photoURL || "https://i.ibb.co/mR79Y6B/user.png"} alt="User Profile" />
                   </div>
-                  <button
-                    onClick={handleSignOut}
-                    className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
-                  >
-                    Log Out
-                  </button>
-                </div> */}
-              {/* </div> */}
-
-              {/* <input
-                onChange={(e) => handleTheme(e.target.checked)}
-                type="checkbox"
-                defaultChecked={localStorage.getItem("theme") === "night"}
-                className="toggle"
-              /> */}
-                <input
-      type="checkbox"
-      className="toggle toggle-primary"
-      checked={theme === "night"}
-      onChange={handleTheme}
-    />
-              {/* Avatar Dropdown */}
-              <div className="relative group">
-                <button
-                  className="flex items-center space-x-2 focus:outline-none"
-                  aria-label="User menu"
-                >
-                  {/* ✅ Avatar with fallback */}
-                  <div className="relative">
-                    {user.photoURL ? (
-                      <img
-                        src={user.photoURL}
-                        alt={user.displayName || "User"}
-                        className="w-8 h-8 rounded-full border border-white/30 object-cover"
-                        onError={(e) => {
-                          // Fallback if photoURL broken
-                          e.target.style.display = "none";
-                          e.target.nextSibling.style.display = "flex";
-                        }}
-                      />
-                    ) : null}
-
-                    {/* Fallback: Initials circle (always rendered, hidden by default) */}
-                    <div
-                      className="absolute inset-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-medium"
-                      style={{ display: user.photoURL ? "none" : "flex" }}
-                    >
-                      {(user.displayName || user.email)
-                        .split(/\s+/)
-                        .map((n) => n[0])
-                        .join("")
-                        .toUpperCase()
-                        .slice(0, 2)}
-                    </div>
-                  </div>
-
-                  <span className="hidden md:inline text-gray-700 font-medium">
-                    {user.displayName || user.email.split("@")[0]}
-                  </span>
-                </button>
-
-                {/* Dropdown */}
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden group-hover:block z-10 border">
-                  <div className="px-4 py-2 text-sm text-gray-700 border-b">
-                    {user.displayName}
-                    <br />
-                    <span className="text-xs text-gray-500">{user.email}</span>
-                  </div>
-                  <button
-                    onClick={handleSignOut}
-                    className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
-                  >
-                    Log Out
-                  </button>
-                </div>
+                </label>
+                <ul tabIndex={0} className="mt-3 z-[1] p-3 shadow-2xl menu menu-sm dropdown-content bg-base-100 rounded-xl w-60 border border-base-200 text-base-content">
+                  <li className="px-4 py-3 bg-blue-50 rounded-lg mb-2">
+                    <span className="font-bold text-blue-800 truncate">{user.displayName || "User"}</span>
+                    <span className="text-[10px] text-gray-500 truncate">{user.email}</span>
+                  </li>
+                  <li><Link to="/dashboard" className="py-2 hover:bg-blue-50 font-medium">User Dashboard</Link></li>
+                  <li><Link to="/dashboard/profile" className="py-2 hover:bg-blue-50 font-medium">View Profile</Link></li>
+                  <div className="divider my-1"></div>
+                  <li>
+                    <button onClick={handleSignOut} className="bg-red-50 text-red-600 font-bold hover:bg-red-100 py-2">
+                      Logout
+                    </button>
+                  </li>
+                </ul>
               </div>
             </>
           ) : (
-            <>
-              <Link
-                to="/login"
-                className="px-3 py-2 text-gray-600 hover:text-gray-900 font-medium"
-              >
-                Login
+            <div className="flex items-center space-x-4 ml-4">
+              <Link to="/login" className="text-white hover:text-cyan-200 font-bold transition-colors">LOGIN</Link>
+              <Link to="/register" className="btn btn-sm bg-white text-blue-800 border-none hover:bg-cyan-100 px-6 font-bold">
+                REGISTER
               </Link>
-              <Link
-                to="/register"
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-medium"
-              >
-                Register
-              </Link>
-            </>
+            </div>
           )}
+
+          {/* Theme Toggle */}
+          <div className="ml-4 flex items-center">
+            <input type="checkbox" className="toggle toggle-info toggle-sm border-white" checked={theme === "night"} onChange={handleTheme} />
+          </div>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden text-white focus:outline-none"
-          aria-label="Toggle menu"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            {isMobileMenuOpen ? (
-              // Close (X) icon
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            ) : (
-              // Hamburger icon
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            )}
+        {/* Mobile Menu Toggle */}
+        <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden text-white p-2">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
           </svg>
         </button>
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 w-full bg-blue-300 shadow-lg z-20">
-            <div className="container mx-auto px-4 py-4 flex flex-col space-y-3">
-              <NavLink
-                to="/"
-                className={({ isActive }) =>
-                  `px-4 py-2 rounded-md font-medium ${
-                    isActive
-                      ? "bg-blue-900/50 text-white"
-                      : "text-blue-100 hover:bg-blue-900/30"
-                  }`
-                }
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Home
-              </NavLink>
-              <NavLink
-                to="/allJobs"
-                className={({ isActive }) =>
-                  `px-4 py-2 rounded-md font-medium ${
-                    isActive
-                      ? "bg-blue-900/50 text-white"
-                      : "text-blue-100 hover:bg-blue-900/30"
-                  }`
-                }
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                All Jobs
-              </NavLink>
-
-              {user ? (
-                <>
-                  <NavLink
-                    to="/addJobs"
-                    className={({ isActive }) =>
-                      `px-4 py-2 rounded-md font-medium ${
-                        isActive
-                          ? "bg-blue-900/50 text-white"
-                          : "text-blue-100 hover:bg-blue-900/30"
-                      }`
-                    }
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Add a Job
-                  </NavLink>
-                      <NavLink
-      to="/myPostedJobs"
-      className={({ isActive }) =>
-        `px-4 py-2 rounded-md font-medium ${
-          isActive
-            ? "bg-blue-900/50 text-white"
-            : "text-blue-100 hover:bg-blue-900/30"
-        }`
-      }
-      onClick={() => setIsMobileMenuOpen(false)}
-    >
-      My Posted Jobs
-    </NavLink>
-                  <NavLink
-                    to="/my-accepted-tasks"
-                    className={({ isActive }) =>
-                      `px-4 py-2 rounded-md font-medium ${
-                        isActive
-                          ? "bg-blue-900/50 text-white"
-                          : "text-blue-100 hover:bg-blue-900/30"
-                      }`
-                    }
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    My Accepted Tasks
-                  </NavLink>
-
-                  {/* User Info & Logout */}
-                  <div className="pt-2 border-t border-blue-700/50">
-                    <div className="px-4 py-2 text-sm text-blue-100">
-                      <div>{user.displayName || user.email.split("@")[0]}</div>
-                      <div className="text-xs opacity-75">{user.email}</div>
-                    </div>
-                    <button
-                      onClick={() => {
-                        handleSignOut();
-                        setIsMobileMenuOpen(false);
-                      }}
-                      className="w-full text-left px-4 py-2 text-sm text-red-300 hover:bg-red-900/20 rounded-md"
-                    >
-                      Log Out
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <Link
-                    to="/login"
-                    className="px-4 py-2 text-blue-100 hover:bg-blue-900/30 rounded-md font-medium"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Login
-                  </Link>
-                  <Link
-                    to="/register"
-                    className="px-4 py-2 bg-white text-blue-700 rounded-md font-medium hover:bg-blue-50"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Register
-                  </Link>
-                </>
-              )}
-            </div>
-          </div>
-        )}
       </div>
+
+      {/* Mobile Drawer */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden absolute top-full left-0 w-full bg-blue-900/95 backdrop-blur-xl border-t border-white/10 py-6 px-4 z-50 animate-fadeIn">
+          <div className="flex flex-col space-y-3">
+            <NavLink to="/" onClick={() => setIsMobileMenuOpen(false)} className={navLinkStyles}>Home</NavLink>
+            <NavLink to="/allJobs" onClick={() => setIsMobileMenuOpen(false)} className={navLinkStyles}>All Jobs</NavLink>
+            <NavLink to="/aboutUs" onClick={() => setIsMobileMenuOpen(false)} className={navLinkStyles}>About Us</NavLink>
+            <NavLink to="/contact" onClick={() => setIsMobileMenuOpen(false)} className={navLinkStyles}>Contact</NavLink>
+            <NavLink to="/blog" onClick={() => setIsMobileMenuOpen(false)} className={navLinkStyles}>Blog</NavLink>
+            {user && (
+              <>
+                <NavLink to="/addJobs" onClick={() => setIsMobileMenuOpen(false)} className={navLinkStyles}>Add Job</NavLink>
+                <NavLink to="/myPostedJobs" onClick={() => setIsMobileMenuOpen(false)} className={navLinkStyles}>My Posts</NavLink>
+                <button onClick={handleSignOut} className="btn btn-error btn-outline btn-sm w-full mt-4">Logout</button>
+              </>
+            )}
+            {!user && <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="btn btn-primary btn-sm w-full">Login</Link>}
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
