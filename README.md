@@ -11,7 +11,7 @@
 <!-- ## 🖼️ Screenshot > 
 ![Project Screenshot](../../Projects11/freelance_client/public/10e78658-8136-4eb0-88a7-bf9e3f069e4b.png) -->
 ## 🖼️ Screenshot
-![Project Screenshot](https://raw.githubusercontent.com/KhMansura/freelance_client/main/public/10e78658-8136-4eb0-88a7-bf9e3f069e4b.png)
+![Project Screenshot](https://raw.githubusercontent.com/KhMansura/freelance_client/main/public/home.png)
 
 
 ## ✨ Key Features
@@ -37,6 +37,12 @@
 ### 🛡️ Protected Routes
 - Only logged‑in users can access dashboard pages  
 - Role‑based UI elements
+
+### 📊 Dashboard & Data Visualization
+- **Dynamic Charts:** Real-time data visualization using **Recharts** to show job distribution by category.
+- **Interactive Data Table:** Paginated/scrollable tables fetching real backend data with hover states.
+- **Stats Overview:** Personalized cards calculating total jobs and potential revenue dynamically.
+- **Instant Profile Sync:** Specialized React state logic to ensure Sidebar/Navbar updates instantly upon profile modification.
 
 ---
 
@@ -92,9 +98,12 @@
 ```bash
 git clone https://github.com/KhMansura/freelance_client.git
 git clone https://github.com/KhMansura/freelance_server.git
-2. Install dependencies
-cd freelance_client
-npm install
+### 2. Install dependencies
+# Client
+cd freelance_client && npm install
+
+# Server
+cd ../freelance_server && npm install
 
 cd ../freelance_server
 npm install
@@ -121,6 +130,12 @@ http://localhost:5173
   - Secure authentication
   - Environment variables used
   - Meets all assignment requirements
+  ## ✅ Assignment Requirements Met
+- [x] **Private CRUD:** All edit/delete operations are nested within the protected Dashboard.
+- [x] **Real Data Visualization:** No dummy data; charts reflect live MongoDB collection states.
+- [x] **Profile Management:** Fully editable and readable profile with full-width layout.
+- [x] **UX & Accessibility:** WCAG-compliant contrast, dark mode support, and zero "Lorem Ipsum."
+- [x] **Responsiveness:** Tested for Mobile, Tablet, and Desktop using Tailwind breakpoints.
 
 
 
