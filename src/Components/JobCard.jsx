@@ -35,7 +35,7 @@ export default function JobCard({ job }) {
           {job.summary}
         </p>
 
-        {/* Meta Info Section */}
+        {/* Meta Info */}
         <div className="grid grid-cols-2 gap-y-2 mb-4 pt-4 border-t border-base-200">
           <div className="flex items-center gap-2 text-xs text-gray-600">
             <FaDollarSign className="text-primary" />

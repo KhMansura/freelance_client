@@ -158,5 +158,5 @@ html[data-theme="night"] .btn-primary {
   @apply flex-grow-0;
 }
 .job-card p {
-  @apply line-clamp-3; /* max 3 lines */
+  @apply line-clamp-3;
 }

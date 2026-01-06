@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination, EffectFade } from "swiper/modules";
 
-// Import Swiper styles
+// Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -46,7 +46,7 @@ export default function Hero() {
               className="relative h-full w-full bg-cover bg-center"
               style={{ backgroundImage: `url(${slide.img})` }}
             >
-              {/* Overlay for better text contrast */}
+      
               <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                 <div className="text-center px-6 max-w-4xl">
                   <motion.h1
@@ -73,7 +73,7 @@ export default function Hero() {
                     transition={{ delay: 0.5 }}
                     className="flex flex-col sm:flex-row justify-center gap-4"
                   >
-                    <Link to="/addJobs" className="btn btn-primary btn-lg shadow-lg hover:scale-105 transition-transform">
+                    <Link to="/dashboard/add-Job" className="btn btn-primary btn-lg shadow-lg hover:scale-105 transition-transform">
                       Hire Talent
                     </Link>
                     <Link to="/allJobs" className="btn btn-outline btn-lg text-white border-white hover:bg-white hover:text-blue-900 shadow-lg">
@@ -87,7 +87,7 @@ export default function Hero() {
         ))}
       </Swiper>
 
-      {/* Requirement: Visual hint to next section (Bouncing Arrow) */}
+      {/* Visual hint */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 hidden md:block">
         <motion.div
           animate={{ y: [0, 10, 0] }}

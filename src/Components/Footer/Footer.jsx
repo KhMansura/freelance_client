@@ -2,13 +2,12 @@ import { Link } from "react-router";
 
 export default function Footer() {
   return (
-    // Uses bg-neutral and text-neutral-content for automatic high contrast in both modes
     <footer className="bg-neutral text-neutral-content pt-16 pb-8 border-t border-base-300">
       <div className="container mx-auto px-4">
-        {/* Main Footer Grid */}
+        {/* Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           
-          {/* Column 1: Brand & Tagline */}
+          {/* Brand & Tagline */}
           <div className="space-y-4">
             <h3 className="text-white text-2xl font-bold flex items-center">
               <span className="bg-primary w-2 h-8 mr-3 rounded-full"></span>
@@ -20,28 +19,26 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Column 2: Quick Links */}
+          {/*  Quick Links */}
           <div>
             <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-xs opacity-90">Explore</h4>
             <ul className="space-y-3 text-sm">
               <li><Link to="/" className="hover:text-primary transition-colors opacity-80 hover:opacity-100">Home</Link></li>
               <li><Link to="/allJobs" className="hover:text-primary transition-colors opacity-80 hover:opacity-100">Browse All Jobs</Link></li>
-              <li><Link to="/addJobs" className="hover:text-primary transition-colors opacity-80 hover:opacity-100">Post a Project</Link></li>
-              <li><Link to="/my-accepted-tasks" className="hover:text-primary transition-colors opacity-80 hover:opacity-100">Active Tasks</Link></li>
+              <li><Link to="/dashboard/add-Job" className="hover:text-primary transition-colors opacity-80 hover:opacity-100">Post a Project</Link></li>
+              <li><Link to="/dashboard/my-accepted-tasks" className="hover:text-primary transition-colors opacity-80 hover:opacity-100">Active Tasks</Link></li>
             </ul>
           </div>
 
-          {/* Column 3: Contact Info */}
+          {/*  Contact Info */}
           <div>
             <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-xs opacity-90">Contact Us</h4>
             <ul className="space-y-3 text-sm opacity-80">
               <li className="flex items-center gap-3 group cursor-default">
-  {/* Icon container with better contrast and hover effect */}
   <span className="bg-blue-600/20 text-blue-400 p-2 rounded-lg border border-blue-500/20 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 shadow-sm">
     📍
   </span> 
   
-  {/* Text with explicit high-contrast color */}
   <span className="text-gray-200 group-hover:text-white transition-colors font-medium">
     123 Dev Lane, Tech City
   </span>
@@ -57,7 +54,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Legal & Newsletter */}
+          {/* Legal & Newsletter */}
           <div>
             <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-xs opacity-90">Legal</h4>
             <ul className="space-y-3 text-sm">
@@ -123,7 +120,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Dynamic Theme */}
     
         <div className="mt-8 flex justify-center gap-8 border-t border-white/5 pt-6">
   {/* Secure Signal */}

@@ -7,7 +7,7 @@ export default function Support() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
-    // Add your form submission logic here
+  
   };
 
   const helpCategories = [
@@ -41,7 +41,7 @@ export default function Support() {
       </section>
 
       <div className="container mx-auto px-4 py-16">
-        {/* Help Categories Grid */}
+        {/* Help Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
           {helpCategories.map((cat, i) => (
             <motion.div 
@@ -57,7 +57,7 @@ export default function Support() {
           ))}
         </div>
 
-        {/* Contact Form Section */}
+        {/* Contact Form */}
         <section className="grid lg:grid-cols-2 gap-16 items-center bg-base-200 rounded-3xl p-8 md:p-12">
           <div>
             <h2 className="text-3xl font-bold mb-6">Can't find an answer?</h2>

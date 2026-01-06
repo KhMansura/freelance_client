@@ -52,7 +52,7 @@ export default function HowItWorks() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-        {/* Decorative Line (Desktop Only) */}
+        {/* Decorative Line */}
         <div className="hidden lg:block absolute top-1/4 left-0 w-full h-0.5 bg-gray-100 -z-10"></div>
 
         {steps.map((step, index) => (

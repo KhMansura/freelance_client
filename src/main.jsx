@@ -31,37 +31,7 @@ import Blog from './pages/Blog';
 import DashboardLayout from './layout/DashboardLayout';
 import ProfilePage from './pages/Dashboard/ProfilePage';
 import DashboardHome from './pages/Dashboard/DashboardHome';
-
-
-
-
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <RootLayout />,
-//     errorElement: <NotFound />,
-//     children: [
-//       { index: true, element: <Home /> },
-//       { path: 'allJobs', element: <PrivateRoute><AllJobs /></PrivateRoute> },
-//       { path: 'allJobs/:id', element: <PrivateRoute><JobDetails /></PrivateRoute> },
-//       { path: 'addJobs', element: <PrivateRoute><AddJobs /></PrivateRoute> },
-//       { path: 'myPostedJobs', element: <PrivateRoute><MyPostedJobs></MyPostedJobs></PrivateRoute> },
-//       { path: 'my-accepted-tasks', element: <PrivateRoute><MyAcceptedTasks /></PrivateRoute> },
-//       { path: 'login', element: <Login /> },
-//       { path: 'register', element: <Register /> },
-//       {path: 'aboutUs', element: <AboutUs />},
-//       {path: 'contact', element: <Contact />},
-//       {path: 'blog', element: <Blog />},
-//       {path: 'terms',element: <TermsOfService />},
-//       {path: 'privacy',element: <PrivacyPolicy />},
-//       {path: 'support',element:<Support></Support>},
-//       {path: 'profile', element: <ProfilePage />},
-//       {path:'/dashboard', element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>},
-//       { path:  'updateJob/:id', element:<PrivateRoute><UpdateJob></UpdateJob></PrivateRoute>},
-//       { path: '*', element: <NotFound /> },
-//     ],
-//   },
-// ]);
+import BlogDetails from './pages/BlogDetails';
 
 const router = createBrowserRouter([
   {
@@ -77,6 +47,7 @@ const router = createBrowserRouter([
       { path: 'aboutUs', element: <AboutUs /> },
       { path: 'contact', element: <Contact /> },
       { path: 'blog', element: <Blog /> },
+      { path: 'blog/:id', element: <BlogDetails /> },
       
       // --- DASHBOARD NESTED ROUTES START ---
       {

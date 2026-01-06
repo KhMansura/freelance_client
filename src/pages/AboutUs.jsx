@@ -4,7 +4,7 @@ import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router";
 
 const AboutUs = () => {
-  const { user } = useAuth(); // Check if user is logged in
+  const { user } = useAuth(); 
   const navigate = useNavigate();
 
   const handleJoinClick = () => {
@@ -92,9 +92,6 @@ const AboutUs = () => {
               ))}
             </ul>
 
-            {/* <div className="pt-4">
-               <button className="btn btn-primary btn-lg rounded-2xl px-10">Join Our Community</button>
-            </div> */}
             {/* Updated Button Section */}
         <div className="pt-4 text-center lg:text-left">
            <button 

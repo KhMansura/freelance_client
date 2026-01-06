@@ -4,7 +4,7 @@ import { Outlet } from "react-router";
 import Footer from "../Components/Footer/Footer";
 
 const RootLayout = () => {
-  //   Persist theme on load (dark/light toggle)
+
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
     document.documentElement.setAttribute("data-theme", savedTheme);

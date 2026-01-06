@@ -8,7 +8,7 @@ const Contact = () => {
     const form = e.target;
     const name = form.name.value;
     
-    // For demo purposes, we show a success message
+   
     toast.success(`Thanks ${name}, your message was sent!`);
     form.reset();
   };
@@ -29,7 +29,7 @@ const Contact = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           
-          {/* LEFT: Contact Information (5 Cols) */}
+          {/* LEFT: Contact Information */}
           <div className="lg:col-span-5 space-y-6">
             <div className="bg-base-100 p-8 rounded-[2.5rem] shadow-sm border border-base-300">
               <h2 className="text-2xl font-bold mb-8">Contact Information</h2>
@@ -73,7 +73,7 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* RIGHT: Contact Form (7 Cols) */}
+          {/* RIGHT: Contact Form  */}
           <div className="lg:col-span-7">
             <div className="bg-base-100 p-10 rounded-[2.5rem] shadow-xl border border-base-300">
               <h3 className="text-2xl font-bold mb-6">Send a Message</h3>

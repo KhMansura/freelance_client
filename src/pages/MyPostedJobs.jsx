@@ -15,7 +15,7 @@ export default function MyPostedJobs() {
     if (!user) return setLoading(false);
     try {
       const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/jobs`, {
-        params: { email: user.email } // ✅ fetch user's jobs
+        params: { email: user.email } 
       });
       setJobs(Array.isArray(data) ? data : []);
     } catch (err) {
@@ -30,13 +30,13 @@ export default function MyPostedJobs() {
     fetchJobs();
   }, [user]);
 
-  // ✅ DELETE JOB WITH TOKEN
+  // DELETE JOB WITH TOKEN
   const handleDelete = async (jobId) => {
     try {
-      const token = await user.getIdToken(); // 🔑
+      const token = await user.getIdToken(); 
       await axios.delete(
         `${import.meta.env.VITE_API_URL}/jobs/${jobId}`,
-        { headers: { Authorization: `Bearer ${token}` } } // 🔐
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       setJobs(jobs.filter(job => job._id !== jobId));
       toast.success("Job deleted");
@@ -47,7 +47,7 @@ export default function MyPostedJobs() {
     }
   };
 
-  // ✅ CONFIRM + DELETE
+  // CONFIRM + DELETE
   const confirmDelete = async (jobId) => {
     const result = await Swal.fire({
       title: "Delete Job?",
@@ -89,7 +89,7 @@ export default function MyPostedJobs() {
               <p className="text-sm mb-3 line-clamp-2">{job.summary}</p>
               <div className="flex gap-2">
                 <button
-                  onClick={() => navigate(`/updateJob/${job._id}`)}
+                  onClick={() => navigate(`/dashboard/updateJob/${job._id}`)}
                   className="btn btn-sm btn-secondary"
                 >
                   Update
