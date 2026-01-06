@@ -66,28 +66,36 @@ export default function Home() {
 
         
         <section className="grid lg:grid-cols-2 gap-10 items-stretch">
-          {/* Top Categories */}
-          <div className="bg-white rounded-2xl shadow-sm border p-8">
-            <div className="flex items-center mb-6">
-              <div className="bg-blue-100 p-3 rounded-lg mr-4">
-                 <span className="text-2xl">🚀</span>
-              </div>
-              <h3 className="text-2xl font-bold">Top Categories</h3>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { name: "Web Development", icon: "💻", desc: "Build modern apps" },
-                { name: "Graphic Design", icon: "🎨", desc: "Creative visuals" },
-                { name: "Marketing", icon: "📈", desc: "Grow businesses" },
-                { name: "Writing", icon: "✍️", desc: "Content strategy" },
-              ].map((cat, i) => (
-                <div key={i} className="p-4 rounded-xl bg-gray-50 hover:bg-blue-50 transition border border-transparent hover:border-blue-200">
-                  <span className="text-2xl block mb-2">{cat.icon}</span>
-                  <h4 className="font-bold text-sm">{cat.name}</h4>
-                </div>
-              ))}
-            </div>
-          </div>
+{/* Top Categories */}
+<div className="bg-white dark:bg-neutral rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-8 transition-colors duration-300">
+  <div className="flex items-center mb-6">
+    {/* Icon Container with dark mode support */}
+    <div className="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-lg mr-4">
+       <span className="text-2xl">🚀</span>
+    </div>
+    <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Top Categories</h3>
+  </div>
+  
+  <div className="grid grid-cols-2 gap-4">
+    {[
+      { name: "Web Development", icon: "💻", desc: "Build modern apps" },
+      { name: "Graphic Design", icon: "🎨", desc: "Creative visuals" },
+      { name: "Marketing", icon: "📈", desc: "Grow businesses" },
+      { name: "Writing", icon: "✍️", desc: "Content strategy" },
+    ].map((cat, i) => (
+      <div 
+        key={i} 
+        className="p-4 rounded-xl bg-gray-50 dark:bg-gray-800/50 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all border border-transparent hover:border-blue-200 dark:hover:border-blue-700 group"
+      >
+        <span className="text-2xl block mb-2">{cat.icon}</span>
+        <h4 className="font-bold text-sm text-gray-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400">
+            {cat.name}
+        </h4>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{cat.desc}</p>
+      </div>
+    ))}
+  </div>
+</div>
 
           {/* Why FreelanceHub */}
           <div className="bg-gradient-to-br from-blue-600 to-indigo-800 rounded-2xl p-8 text-white">
