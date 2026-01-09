@@ -31,7 +31,7 @@ export default function AuthProvider({ children }) {
     // 2. Force Firebase to reload the internal user data
     await auth.currentUser.reload();
     
-    // 3. CRITICAL: Update state with a NEW object reference
+    // 3. Update state with a NEW object reference
     
     setUser({ ...auth.currentUser,
       displayName: profile.displayName || auth.currentUser.displayName,

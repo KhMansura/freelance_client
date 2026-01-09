@@ -202,7 +202,7 @@ const JobDetails = () => {
           {/* RIGHT: Key Information & Sidebar  */}
           <div className="lg:col-span-4 space-y-6">
             
-            {/* Key Specs Card - Requirement: Key Information/Specs */}
+            {/* Key Specs Card  */}
             <div className="bg-base-100 p-8 rounded-[2rem] shadow-sm border border-base-300 sticky top-28">
               <h3 className="text-xl font-bold mb-8 flex items-center gap-2">
                 <FaBriefcase className="text-primary"/> Project Specs
@@ -248,7 +248,7 @@ const JobDetails = () => {
 
               <div className="divider opacity-20 my-8"></div>
 
-              {/* Suggested/Safety Section  */}
+              {/* Suggested Section  */}
               <div className="bg-warning/5 rounded-2xl p-5 border border-warning/20">
                 <h4 className="flex items-center gap-2 text-sm font-bold text-warning-content mb-2">
                   <FaShieldAlt /> Safety Guidelines
@@ -265,7 +265,7 @@ const JobDetails = () => {
           </div>
           
         </div>
-        {/* Related/Suggested Items Section ) */}
+        {/* Related Items Section ) */}
 <div className="mt-20 border-t border-base-300 pt-16">
   <div className="flex items-center justify-between mb-8">
     <div>

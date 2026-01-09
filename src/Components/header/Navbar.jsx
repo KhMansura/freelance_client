@@ -61,9 +61,12 @@ export default function Navbar() {
           <div className="bg-white p-1 rounded-lg transition-transform group-hover:scale-105 shadow-md">
             <img src={logo} alt="FreelanceHub" className="h-8 w-auto object-contain" />
           </div>
-          <span className="text-xl font-bold text-white tracking-tighter uppercase">
+          {/* <span className="text-xl font-bold text-white tracking-tighter uppercase">
             Freelance<span className="text-cyan-300">Hub</span>
-          </span>
+          </span> */}
+          <h3 className="text-white text-2xl font-bold flex items-center">
+              Freelance<span className="text-primary">Hub</span>
+            </h3>
         </Link>
 
         {/* Desktop Navigation */}
